@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     //MARK: - UI Elements
     private var tableView: UITableView!
     
@@ -18,7 +18,6 @@ class HomeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
     }
-
     
     private var news = [HomePresentation]()
     
@@ -71,10 +70,16 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = news[indexPath.row].title
-        cell.textLabel?.numberOfLines = 0
+        let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
+        cell.set(title: news[indexPath.row].title)
         return cell
+    }
+    
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
 }
 
@@ -88,7 +93,8 @@ extension HomeViewController {
     private func createTableView() {
         tableView = UITableView(frame: view.bounds)
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.register(HomeNewsCell.self, forCellReuseIdentifier: HomeNewsCell.reuseID)
         view.addSubview(tableView)
     }
 }
