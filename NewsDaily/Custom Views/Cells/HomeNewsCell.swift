@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 final class HomeNewsCell: UITableViewCell {
     static let reuseID = "HomeNewsCell"
@@ -19,8 +20,11 @@ final class HomeNewsCell: UITableViewCell {
         configure()
     }
     
-    func set(title: String) {
+    func set(title: String, imageURL: String?) {
         articleTitleLabel.text = title
+        if imageURL != nil {
+            articleImageView.sd_setImage(with: URL(string: imageURL!), placeholderImage: nil)
+        }
     }
     
     private func configure() {
@@ -46,5 +50,4 @@ final class HomeNewsCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

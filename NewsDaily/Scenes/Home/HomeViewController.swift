@@ -27,9 +27,7 @@ final class HomeViewController: UIViewController {
         createTableView()
         viewModel.delegate = self
         viewModel.load()
-    }
-    
-    
+    }    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,14 +40,16 @@ extension HomeViewController: HomeViewDelegate {
     func handleOutputs(_ output: HomeViewModelOutput) {
         switch output {
         case .startLoading:
-            print("loading")
+            break
         case .endLoading:
-            print("endLoading")
+            break
         case .didUploadWithNews(let news):
             self.news = news
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+        case .didSelectItem(let title):
+            print(title)
         case .pagination:
             break
         case .refreshNews:
@@ -71,15 +71,20 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
-        cell.set(title: news[indexPath.row].title)
+        let article = news[indexPath.row]
+        cell.set(title: article.title, imageURL: article.urlToImage)
         return cell
     }
     
 }
 
 extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.selectItem(at: indexPath.row)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 130
     }
 }
 

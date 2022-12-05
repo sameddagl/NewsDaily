@@ -41,6 +41,7 @@
 		2C16FE93293E974900FF5BA4 /* NDTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE92293E974900FF5BA4 /* NDTitleLabel.swift */; };
 		2C16FE96293E984E00FF5BA4 /* NDBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE95293E984E00FF5BA4 /* NDBodyLabel.swift */; };
 		2C16FE98293E98D200FF5BA4 /* NDCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE97293E98D200FF5BA4 /* NDCellImage.swift */; };
+		2C16FE9E293E9FF700FF5BA4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C16FE9D293E9FF700FF5BA4 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C16FE9E293E9FF700FF5BA4 /* SDWebImage in Frameworks */,
 				2C16FE42293E654C00FF5BA4 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +339,7 @@
 			name = NewsDaily;
 			packageProductDependencies = (
 				2C16FE41293E654C00FF5BA4 /* SnapKit */,
+				2C16FE9D293E9FF700FF5BA4 /* SDWebImage */,
 			);
 			productName = NewsDaily;
 			productReference = 2C16FE29293E647100FF5BA4 /* NewsDaily.app */;
@@ -369,6 +372,7 @@
 			mainGroup = 2C16FE20293E647100FF5BA4;
 			packageReferences = (
 				2C16FE40293E654C00FF5BA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2C16FE9C293E9FF700FF5BA4 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 2C16FE2A293E647100FF5BA4 /* Products */;
 			projectDirPath = "";
@@ -667,6 +671,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		2C16FE9C293E9FF700FF5BA4 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -674,6 +686,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2C16FE40293E654C00FF5BA4 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		2C16FE9D293E9FF700FF5BA4 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C16FE9C293E9FF700FF5BA4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
