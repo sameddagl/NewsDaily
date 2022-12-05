@@ -11,7 +11,7 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Search"
+        navigationItem.title = "search_title".localized(with: "")
         view.backgroundColor = .systemBackground
     }
     

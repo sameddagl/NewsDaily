@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  NewsDaily
+
+  Created by Samed Dağlı on 5.12.2022.
+  
+*/
+
+"news_title" = "News";
+"search_title" = "Search";
+"favorites_title" = "Favorites";

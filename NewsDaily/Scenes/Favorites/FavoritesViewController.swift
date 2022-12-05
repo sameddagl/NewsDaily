@@ -11,7 +11,7 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Favorites"
+        navigationItem.title = "favorites_title".localized(with: "")
         view.backgroundColor = .systemBackground
     }
     
