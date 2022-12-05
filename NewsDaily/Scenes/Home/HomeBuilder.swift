@@ -9,12 +9,10 @@ import UIKit
 
 final class HomeBuilder {
     static func make() -> UINavigationController {
-        let vc = HomeViewController()
-        
         let viewModel = HomeViewModel(newsService: appContainer.newsService)
-        viewModel.delegate = vc
-        vc.viewModel = viewModel
-        
+
+        let vc = HomeViewController(viewModel: viewModel)
+
         let nav = UINavigationController(rootViewController: vc)
         
         return nav

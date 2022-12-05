@@ -22,6 +22,7 @@ enum NewsEndpoint: HTTPEndpoint {
                 URLQueryItem(name: "apiKey", value: NetworkHelper.apiKey),
                 URLQueryItem(name: "language", value: Locale.current.languageCode),
                 URLQueryItem(name: "page", value: String(page)),
+                URLQueryItem(name: "pageSize", value: String(30)),
                 URLQueryItem(name: "sortBy", value: "popularity"),
                 URLQueryItem(name: "searchIn", value: "content"),
                 URLQueryItem(name: "q", value: category.rawValue)
