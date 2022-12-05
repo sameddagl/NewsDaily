@@ -20,7 +20,7 @@ final class AppRouter {
         UITabBar.appearance().tintColor = .label
         UINavigationBar.appearance().tintColor = .label
         
-        let homeScreen = UINavigationController(rootViewController: HomeViewController())
+        let homeScreen = HomeBuilder.make()
         homeScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.home, selectedImage: SFSymbols.homeFill)
         let searchScreen = UINavigationController(rootViewController: SearchViewController())
         searchScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.search, selectedImage: nil)
