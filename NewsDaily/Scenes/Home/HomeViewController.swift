@@ -40,9 +40,9 @@ extension HomeViewController: HomeViewDelegate {
     func handleOutputs(_ output: HomeViewModelOutput) {
         switch output {
         case .startLoading:
-            break
+            self.showLoadingScreen()
         case .endLoading:
-            break
+            self.dismissLoadingScreen()
         case .didUploadWithNews(let news):
             self.news = news
             DispatchQueue.main.async {
@@ -76,6 +76,17 @@ extension HomeViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "News"
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.textColor = UIColor.label
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        header.textLabel?.frame = .init(x: 20, y: 0, width: view.frame.width, height: 20)
+    }
+    
 }
 
 extension HomeViewController: UITableViewDelegate {
@@ -99,6 +110,7 @@ extension HomeViewController {
         tableView = UITableView(frame: view.bounds)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.tableHeaderView = UIView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 200))
         tableView.register(HomeNewsCell.self, forCellReuseIdentifier: HomeNewsCell.reuseID)
         view.addSubview(tableView)
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C068171293F2BEF0085F1D3 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C068170293F2BEF0085F1D3 /* UIViewController+Ext.swift */; };
 		2C16FE2D293E647100FF5BA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE2C293E647100FF5BA4 /* AppDelegate.swift */; };
 		2C16FE2F293E647100FF5BA4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE2E293E647100FF5BA4 /* SceneDelegate.swift */; };
 		2C16FE36293E647200FF5BA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C16FE35293E647200FF5BA4 /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C068170293F2BEF0085F1D3 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		2C16FE29293E647100FF5BA4 /* NewsDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C16FE2C293E647100FF5BA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C16FE2E293E647100FF5BA4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C06816C293F2B4D0085F1D3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		2C16FE20293E647100FF5BA4 = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				2C16FE65293E756300FF5BA4 /* String+Ext.swift */,
+				2C068170293F2BEF0085F1D3 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -188,6 +198,7 @@
 		2C16FE49293E66A300FF5BA4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				2C06816C293F2B4D0085F1D3 /* Protocols */,
 				2C16FE51293E670A00FF5BA4 /* Constants.swift */,
 			);
 			path = Helper;
@@ -404,6 +415,7 @@
 				2C16FE98293E98D200FF5BA4 /* NDCellImage.swift in Sources */,
 				2C16FE52293E670A00FF5BA4 /* Constants.swift in Sources */,
 				2C16FE93293E974900FF5BA4 /* NDTitleLabel.swift in Sources */,
+				2C068171293F2BEF0085F1D3 /* UIViewController+Ext.swift in Sources */,
 				2C16FE6D293E76EE00FF5BA4 /* NetworkError.swift in Sources */,
 				2C16FE6B293E769600FF5BA4 /* Service.swift in Sources */,
 				2C16FE2D293E647100FF5BA4 /* AppDelegate.swift in Sources */,
