@@ -20,12 +20,14 @@ final class HomeViewController: UIViewController {
     }
     
     //MARK: - Properties
+    private var dataSource: UITableViewDiffableDataSource<Int, HomePresentation>!
     private var news = [HomePresentation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         createTableView()
+        configureDataSource()
         viewModel.delegate = self
         viewModel.load()
     }
@@ -46,9 +48,7 @@ extension HomeViewController: HomeViewDelegate {
             self.dismissLoadingScreen()
         case .didUploadWithNews(let news):
             self.news = news
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.updateNews()
         case .didSelectItem(let title):
             print(title)
         case .pagination:
@@ -63,20 +63,6 @@ extension HomeViewController: HomeViewDelegate {
     func navigate(to route: HomeViewModelRoute) {
         
     }
-}
-
-extension HomeViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return news.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
-        let article = news[indexPath.row]
-        cell.set(article: article)
-        return cell
-    }
-    
 }
 
 extension HomeViewController: UITableViewDelegate {
@@ -96,17 +82,17 @@ extension HomeViewController: UITableViewDelegate {
         viewModel.pagination(height: height, offset: offset, contentHeight: contentHeight)
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "News"
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.textColor = UIColor.label
-        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 25)
-        header.textLabel?.frame = .init(x: 20, y: 0, width: header.frame.width, height: header.frame.height)
-        header.textLabel?.textAlignment = .left
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "News"
+//    }
+//
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        guard let header = view as? UITableViewHeaderFooterView else { return }
+//        header.textLabel?.textColor = UIColor.label
+//        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+//        header.textLabel?.frame = .init(x: 20, y: 0, width: header.frame.width, height: header.frame.height)
+//        header.textLabel?.textAlignment = .left
+//    }
 }
 
 //MARK: - UI Related
@@ -119,9 +105,26 @@ extension HomeViewController {
     
     private func createTableView() {
         tableView = UITableView(frame: view.frame)
-        tableView.dataSource = self
         tableView.delegate = self
         tableView.register(HomeNewsCell.self, forCellReuseIdentifier: HomeNewsCell.reuseID)
         view.addSubview(tableView)
+    }
+    
+    private func configureDataSource() {
+        dataSource = UITableViewDiffableDataSource<Int, HomePresentation>(tableView: tableView, cellProvider: { tableView, indexPath, article in
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
+            let article = self.news[indexPath.row]
+            cell.set(article: article)
+            return cell
+        })
+    }
+    
+    private func updateNews() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, HomePresentation>()
+        DispatchQueue.main.async {
+            snapshot.appendSections([0])
+            snapshot.appendItems(self.news)
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
     }
 }

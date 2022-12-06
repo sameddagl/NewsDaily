@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HomePresentation {
+struct HomePresentation: Hashable {
     let title: String
     let articleDescription: String?
     let urlToImage: String?
