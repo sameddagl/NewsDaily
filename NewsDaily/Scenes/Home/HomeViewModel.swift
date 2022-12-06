@@ -42,6 +42,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     func selectItem(at index: Int) {
         //TODO
+        notify(.didSelectItem(title: news[index].title))
     }
     
     private func notify(_ output: HomeViewModelOutput) {
