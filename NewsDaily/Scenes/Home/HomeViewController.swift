@@ -20,8 +20,8 @@ final class HomeViewController: UIViewController {
     }
     
     //MARK: - Properties
-    private var dataSource: UITableViewDiffableDataSource<Int, HomePresentation>!
-    private var news = [HomePresentation]()
+    private var dataSource: UITableViewDiffableDataSource<Int, ArticlePresentation>!
+    private var news = [ArticlePresentation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +49,6 @@ extension HomeViewController: HomeViewDelegate {
         case .didUploadWithNews(let news):
             self.news = news
             self.updateNews()
-        case .didSelectItem(let title):
-            print(title)
         case .pagination:
             break
         case .refreshNews:
@@ -61,7 +59,11 @@ extension HomeViewController: HomeViewDelegate {
     }
     
     func navigate(to route: HomeViewModelRoute) {
-        
+        switch route {
+        case .detail(let viewModel):
+            let vc = DetailBuilder.make(viewModel: viewModel)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 
@@ -111,7 +113,7 @@ extension HomeViewController {
     }
     
     private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, HomePresentation>(tableView: tableView, cellProvider: { tableView, indexPath, article in
+        dataSource = UITableViewDiffableDataSource<Int, ArticlePresentation>(tableView: tableView, cellProvider: { tableView, indexPath, article in
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
             let article = self.news[indexPath.row]
             cell.set(article: article)
@@ -120,7 +122,7 @@ extension HomeViewController {
     }
     
     private func updateNews() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, HomePresentation>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, ArticlePresentation>()
         DispatchQueue.main.async {
             snapshot.appendSections([0])
             snapshot.appendItems(self.news)

@@ -8,7 +8,7 @@
 import Foundation
 
 final class HomeViewModel: HomeViewModelProtocol {
-    var delegate: HomeViewDelegate?
+    weak var delegate: HomeViewDelegate?
     private var newsService: NewsServiceProtocol
     
     init(newsService: NewsServiceProtocol) {
@@ -28,7 +28,7 @@ final class HomeViewModel: HomeViewModelProtocol {
             switch result {
             case .success(let news):
                 self.news.append(contentsOf: news.articles)
-                let news = self.news.map{ HomePresentation(article: $0) }
+                let news = self.news.map{ ArticlePresentation(article: $0) }
                 self.notify(.didUploadWithNews(news: news))
             case .failure(let error):
                 self.notify(.didFailWithError(title: "An error occured", message: error.rawValue))
@@ -50,7 +50,8 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     func selectItem(at index: Int) {
         //TODO
-        notify(.didSelectItem(title: news[index].title))
+        let viewModel = DetailViewModel(article: news[index])
+        delegate?.navigate(to: .detail(viewModel: viewModel))
     }
     
     private func notify(_ output: HomeViewModelOutput) {

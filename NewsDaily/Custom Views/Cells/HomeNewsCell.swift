@@ -21,11 +21,11 @@ final class HomeNewsCell: UITableViewCell {
         configure()
     }
     
-    func set(article: HomePresentation) {
+    func set(article: ArticlePresentation) {
         articleTitleLabel.text = article.title
         
         if article.urlToImage != nil {
-            articleImageView.sd_setImage(with: URL(string: article.urlToImage!), placeholderImage: nil)
+            articleImageView.sd_setImage(with: URL(string: article.urlToImage!), placeholderImage: SFSymbols.placeholderImage)
         }
         
         sourceTitleLabel.text = article.sourceName
@@ -47,7 +47,7 @@ final class HomeNewsCell: UITableViewCell {
         sourceTitleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(self).offset(-5)
             make.leading.equalTo(articleImageView.snp.trailing).offset(padding)
-            make.height.equalTo(15)
+            make.height.equalTo(20)
         }
         
         articleTitleLabel.snp.makeConstraints { make in
