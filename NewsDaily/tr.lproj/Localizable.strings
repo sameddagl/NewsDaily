@@ -6,6 +6,6 @@
   
 */
 
-"news_title" = "Haberler";
+"app_name" = "NewsDaily";
 "search_title" = "Arama";
 "favorites_title" = "Favoriler";

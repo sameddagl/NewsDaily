@@ -11,7 +11,7 @@ final class HomeViewController: UIViewController {
     //MARK: - UI Elements
     private var tableView: UITableView!
     
-    //MARK: - Properties
+    //MARK: - Injections
     private var viewModel: HomeViewModelProtocol!
     
     init(viewModel: HomeViewModelProtocol!) {
@@ -19,20 +19,29 @@ final class HomeViewController: UIViewController {
         self.viewModel = viewModel
     }
     
-    private var news = [HomePresentation]()
+    //MARK: - Properties
+    private var dataSource: UITableViewDiffableDataSource<Int, ArticlePresentation>!
+    private var news = [ArticlePresentation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         createTableView()
+        configureDataSource()
         viewModel.delegate = self
         viewModel.load()
-    }    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode =  .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }
 
 //MARK: - View Model Outputs
@@ -45,11 +54,7 @@ extension HomeViewController: HomeViewDelegate {
             self.dismissLoadingScreen()
         case .didUploadWithNews(let news):
             self.news = news
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        case .didSelectItem(let title):
-            print(title)
+            self.updateNews()
         case .pagination:
             break
         case .refreshNews:
@@ -60,33 +65,12 @@ extension HomeViewController: HomeViewDelegate {
     }
     
     func navigate(to route: HomeViewModelRoute) {
-        
+        switch route {
+        case .detail(let viewModel):
+            let vc = DetailBuilder.make(viewModel: viewModel)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
-}
-
-extension HomeViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return news.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
-        let article = news[indexPath.row]
-        cell.set(title: article.title, imageURL: article.urlToImage)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "News"
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.textColor = UIColor.label
-        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        header.textLabel?.frame = .init(x: 20, y: 0, width: view.frame.width, height: 20)
-    }
-    
 }
 
 extension HomeViewController: UITableViewDelegate {
@@ -97,21 +81,57 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let height = tableView.frame.height
+        let offset = tableView.contentOffset.y
+        let contentHeight = tableView.contentSize.height
+        
+        viewModel.pagination(height: height, offset: offset, contentHeight: contentHeight)
+    }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "News"
+//    }
+//
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        guard let header = view as? UITableViewHeaderFooterView else { return }
+//        header.textLabel?.textColor = UIColor.label
+//        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+//        header.textLabel?.frame = .init(x: 20, y: 0, width: header.frame.width, height: header.frame.height)
+//        header.textLabel?.textAlignment = .left
+//    }
 }
 
 //MARK: - UI Related
 extension HomeViewController {
     private func configureView() {
-        navigationItem.title = "news_title".localized(with: "")
+        navigationItem.title = "app_name".localized(with: "")
         view.backgroundColor = .systemBackground
     }
     
     private func createTableView() {
-        tableView = UITableView(frame: view.bounds)
-        tableView.dataSource = self
+        tableView = UITableView(frame: view.frame)
         tableView.delegate = self
-        tableView.tableHeaderView = UIView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 200))
         tableView.register(HomeNewsCell.self, forCellReuseIdentifier: HomeNewsCell.reuseID)
         view.addSubview(tableView)
+    }
+    
+    private func configureDataSource() {
+        dataSource = UITableViewDiffableDataSource<Int, ArticlePresentation>(tableView: tableView, cellProvider: { tableView, indexPath, article in
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
+            let article = self.news[indexPath.row]
+            cell.set(article: article)
+            return cell
+        })
+    }
+    
+    private func updateNews() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, ArticlePresentation>()
+        DispatchQueue.main.async {
+            snapshot.appendSections([0])
+            snapshot.appendItems(self.news)
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
     }
 }

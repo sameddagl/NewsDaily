@@ -21,7 +21,8 @@ final class NDCellImage: UIImageView {
         clipsToBounds = true
         layer.cornerRadius = 20
         
-        backgroundColor = .red
+        backgroundColor = .systemBackground
+        tintColor = .secondarySystemFill
         
         contentMode = .scaleAspectFill
     }

@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct HomePresentation {
+struct ArticlePresentation: Hashable {
     let title: String
     let articleDescription: String?
     let urlToImage: String?
     let publishDate: Date
     let sourceName: String
+    let content: String?
     
     init(article: Article) {
         self.title = article.title
@@ -20,5 +21,6 @@ struct HomePresentation {
         self.urlToImage = article.urlToImage
         self.publishDate = article.publishedAt
         self.sourceName = article.source.name
+        self.content = article.content
     }
 }
