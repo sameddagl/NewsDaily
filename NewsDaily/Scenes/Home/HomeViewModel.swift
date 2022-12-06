@@ -42,10 +42,12 @@ final class HomeViewModel: HomeViewModelProtocol {
             load()
         }
     }
-
+    
     
     func didPullToRefresh() {
-        
+        news.removeAll()
+        currentPage = 1
+        load()
     }
     
     func selectItem(at index: Int) {

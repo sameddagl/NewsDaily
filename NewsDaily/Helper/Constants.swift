@@ -15,4 +15,5 @@ enum SFSymbols {
     static let favoritesFill = UIImage(systemName: "bookmark.fill")
     
     static let placeholderImage = UIImage(systemName: "photo")
+    static let sort = UIImage(systemName: "text.aligncenter")
 }
