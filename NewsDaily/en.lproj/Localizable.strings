@@ -6,6 +6,6 @@
   
 */
 
-"news_title" = "News";
+"app_name" = "NewsDaily";
 "search_title" = "Search";
 "favorites_title" = "Favorites";

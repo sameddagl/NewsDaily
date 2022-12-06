@@ -1,5 +1,5 @@
 //
-//  NDTitleLabel.swift
+//  NDSecondaryLabel.swift
 //  NewsDaily
 //
 //  Created by Samed Dağlı on 6.12.2022.
@@ -7,25 +7,28 @@
 
 import UIKit
 
-final class NDTitleLabel: UILabel {
+final class NDSecondaryLabel: UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
     
-    convenience init(alignment: NSTextAlignment, fontSize: CGFloat) {
+    convenience init(alignment: NSTextAlignment) {
         self.init(frame: .zero)
         textAlignment = alignment
-        font = .systemFont(ofSize: fontSize, weight: .bold)
     }
     
     private func configure() {
-        lineBreakMode = .byTruncatingTail
+        font = .preferredFont(forTextStyle: .subheadline)
+        
+        lineBreakMode = .byWordWrapping
         numberOfLines = 0
         
-        self.adjustsFontSizeToFitWidth = true
-        self.minimumScaleFactor = 0.95
+        adjustsFontSizeToFitWidth = true
+        minimumScaleFactor = 0.9
+        
+        textColor = .secondaryLabel
     }
     
     required init?(coder: NSCoder) {

@@ -14,22 +14,27 @@ final class HomeNewsCell: UITableViewCell {
     
     private let articleImageView = NDCellImage()
     private let articleTitleLabel = NDTitleLabel(alignment: .left, fontSize: 15)
+    private let sourceTitleLabel = NDSecondaryLabel(alignment: .left)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
     }
     
-    func set(title: String, imageURL: String?) {
-        articleTitleLabel.text = title
-        if imageURL != nil {
-            articleImageView.sd_setImage(with: URL(string: imageURL!), placeholderImage: nil)
+    func set(article: HomePresentation) {
+        articleTitleLabel.text = article.title
+        
+        if article.urlToImage != nil {
+            articleImageView.sd_setImage(with: URL(string: article.urlToImage!), placeholderImage: nil)
         }
+        
+        sourceTitleLabel.text = article.sourceName
     }
     
     private func configure() {
         addSubview(articleImageView)
         addSubview(articleTitleLabel)
+        addSubview(sourceTitleLabel)
         
         let padding: CGFloat = 20
         
@@ -39,12 +44,20 @@ final class HomeNewsCell: UITableViewCell {
             make.width.equalTo(self.snp.width).multipliedBy(0.3)
         }
         
+        sourceTitleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(self).offset(-5)
+            make.leading.equalTo(articleImageView.snp.trailing).offset(padding)
+            make.height.equalTo(15)
+        }
+        
         articleTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(padding)
             make.leading.equalTo(articleImageView.snp.trailing).offset(padding)
             make.trailing.equalTo(self).offset(-padding)
-            make.bottom.lessThanOrEqualTo(self).offset(-padding)
+            make.bottom.lessThanOrEqualTo(sourceTitleLabel.snp.top).offset(-padding)
         }
+        
+
     }
     
     required init?(coder: NSCoder) {

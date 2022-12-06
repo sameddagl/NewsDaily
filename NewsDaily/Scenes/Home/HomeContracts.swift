@@ -10,6 +10,7 @@ import Foundation
 protocol HomeViewModelProtocol {
     var delegate: HomeViewDelegate? { get set }
     func load()
+    func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat)
     func didPullToRefresh()
     func selectItem(at index: Int)
 }

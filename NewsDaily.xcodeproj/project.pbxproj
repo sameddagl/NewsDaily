@@ -43,6 +43,7 @@
 		2C16FE96293E984E00FF5BA4 /* NDBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE95293E984E00FF5BA4 /* NDBodyLabel.swift */; };
 		2C16FE98293E98D200FF5BA4 /* NDCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE97293E98D200FF5BA4 /* NDCellImage.swift */; };
 		2C16FE9E293E9FF700FF5BA4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C16FE9D293E9FF700FF5BA4 /* SDWebImage */; };
+		2C69D0DA293F2FDF00DFB6B3 /* NDSecondaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0D9293F2FDF00DFB6B3 /* NDSecondaryLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		2C16FE92293E974900FF5BA4 /* NDTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDTitleLabel.swift; sourceTree = "<group>"; };
 		2C16FE95293E984E00FF5BA4 /* NDBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDBodyLabel.swift; sourceTree = "<group>"; };
 		2C16FE97293E98D200FF5BA4 /* NDCellImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDCellImage.swift; sourceTree = "<group>"; };
+		2C69D0D9293F2FDF00DFB6B3 /* NDSecondaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDSecondaryLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +322,7 @@
 			children = (
 				2C16FE92293E974900FF5BA4 /* NDTitleLabel.swift */,
 				2C16FE95293E984E00FF5BA4 /* NDBodyLabel.swift */,
+				2C69D0D9293F2FDF00DFB6B3 /* NDSecondaryLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				2C16FE7B293E89A800FF5BA4 /* NewsService.swift in Sources */,
 				2C16FE59293E677B00FF5BA4 /* FavoritesViewController.swift in Sources */,
 				2C16FE79293E7E2300FF5BA4 /* NewsCategories.swift in Sources */,
+				2C69D0DA293F2FDF00DFB6B3 /* NDSecondaryLabel.swift in Sources */,
 				2C16FE73293E7C4600FF5BA4 /* Paths.swift in Sources */,
 				2C16FE71293E79D800FF5BA4 /* NewsEndpoint.swift in Sources */,
 				2C16FE5C293E686500FF5BA4 /* SearchViewController.swift in Sources */,

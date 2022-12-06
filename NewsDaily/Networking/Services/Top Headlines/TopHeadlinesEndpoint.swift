@@ -21,7 +21,9 @@ enum TopHeadlinesEndpoint: HTTPEndpoint {
             return [
                 URLQueryItem(name: "apiKey", value: NetworkHelper.apiKey),
                 URLQueryItem(name: "country", value: "us"),
+                URLQueryItem(name: "category", value: "business"),
                 URLQueryItem(name: "page", value: String(page)),
+                URLQueryItem(name: "pageSize", value: String(20))
             ]
         }
     }
