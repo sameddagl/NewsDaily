@@ -23,7 +23,7 @@ final class Service: ServiceProtocol {
             completion(.failure(.badURL))
             return
         }
-        
+                
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endPoint.method.rawValue
         

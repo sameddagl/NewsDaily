@@ -39,7 +39,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc private func sortTapped() {
-        
+        viewModel.didSelectToSort()
     }
     
     @objc private func didPullToRefresh() {
@@ -77,7 +77,19 @@ extension HomeViewController: HomeViewDelegate {
         case .detail(let viewModel):
             let vc = DetailBuilder.make(viewModel: viewModel)
             navigationController?.pushViewController(vc, animated: true)
+        case .sort:
+            let vc = SortViewController()
+            vc.delegate = self
+            vc.modalTransitionStyle = .crossDissolve
+            present(vc, animated: true)
         }
+    }
+}
+
+extension HomeViewController: SortViewDelegate {
+    func didSelectCategory(category: NewsCategories) {
+        viewModel.changeCategory(category: category)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 }
 

@@ -16,8 +16,8 @@ final class HomeViewModel: HomeViewModelProtocol {
     }
     
     private var news = [Article]()
-    
     private var selectedCategory: NewsCategories = .general
+    
     private var currentPage = 1
     
     func load() {
@@ -36,6 +36,13 @@ final class HomeViewModel: HomeViewModelProtocol {
         }
     }
     
+    func changeCategory(category: NewsCategories) {
+        news.removeAll()
+        selectedCategory = category
+        load()
+    }
+
+    
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat) {
         if height + offset - 50 >= contentHeight {
             currentPage += 1
@@ -48,6 +55,10 @@ final class HomeViewModel: HomeViewModelProtocol {
         news.removeAll()
         currentPage = 1
         load()
+    }
+    
+    func didSelectToSort() {
+        delegate?.navigate(to: .sort)
     }
     
     func selectItem(at index: Int) {
