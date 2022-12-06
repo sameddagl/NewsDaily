@@ -48,6 +48,7 @@
 		2C69D0E3293F5C7B00DFB6B3 /* DetailContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E2293F5C7B00DFB6B3 /* DetailContracts.swift */; };
 		2C69D0E5293F5C8400DFB6B3 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E4293F5C8400DFB6B3 /* DetailViewModel.swift */; };
 		2C69D0E7293F5C8D00DFB6B3 /* DetailPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E6293F5C8D00DFB6B3 /* DetailPresentation.swift */; };
+		2C69D0EA293F752000DFB6B3 /* NDActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		2C69D0E2293F5C7B00DFB6B3 /* DetailContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContracts.swift; sourceTree = "<group>"; };
 		2C69D0E4293F5C8400DFB6B3 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		2C69D0E6293F5C8D00DFB6B3 /* DetailPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresentation.swift; sourceTree = "<group>"; };
+		2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDActionButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		2C16FE46293E65D700FF5BA4 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C69D0E8293F751000DFB6B3 /* Buttons */,
 				2C16FE90293E973100FF5BA4 /* Image Views */,
 				2C16FE8F293E972D00FF5BA4 /* Labels */,
 				2C16FE8E293E970900FF5BA4 /* Cells */,
@@ -347,6 +350,14 @@
 			path = "Image Views";
 			sourceTree = "<group>";
 		};
+		2C69D0E8293F751000DFB6B3 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -459,6 +470,7 @@
 				2C16FE8D293E970300FF5BA4 /* HomeNewsCell.swift in Sources */,
 				2C16FE57293E677400FF5BA4 /* DetailViewController.swift in Sources */,
 				2C16FE8B293E8FC600FF5BA4 /* ArticlePresentation.swift in Sources */,
+				2C69D0EA293F752000DFB6B3 /* NDActionButton.swift in Sources */,
 				2C16FE85293E8F8F00FF5BA4 /* HomeBuilder.swift in Sources */,
 				2C16FE7D293E8A0700FF5BA4 /* News.swift in Sources */,
 				2C16FE66293E756300FF5BA4 /* String+Ext.swift in Sources */,

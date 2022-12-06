@@ -18,12 +18,11 @@ final class DetailViewModel: DetailViewModelProtocol {
     
     func load() {
         let detailPresentation = ArticlePresentation(article: article)
-        print(detailPresentation.title + "\n")
-        print(detailPresentation.articleDescription)
+        notify(.load(detailPresentation))
     }
     
-    func didRequestWebPage() {
-        
+    func requestWebPage() {
+        notify(.showWebPage(url: article.url))
     }
     
     private func notify(_ output: DetaiViewModellOutput) {

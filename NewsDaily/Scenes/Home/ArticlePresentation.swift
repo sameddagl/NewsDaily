@@ -13,6 +13,7 @@ struct ArticlePresentation: Hashable {
     let urlToImage: String?
     let publishDate: Date
     let sourceName: String
+    let content: String?
     
     init(article: Article) {
         self.title = article.title
@@ -20,5 +21,6 @@ struct ArticlePresentation: Hashable {
         self.urlToImage = article.urlToImage
         self.publishDate = article.publishedAt
         self.sourceName = article.source.name
+        self.content = article.content
     }
 }

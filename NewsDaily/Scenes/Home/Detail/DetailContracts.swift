@@ -10,11 +10,12 @@ import Foundation
 protocol DetailViewModelProtocol {
     var delegate: DetailViewDelagate? { get set }
     func load()
-    func didRequestWebPage()
+    func requestWebPage()
 }
 
 enum DetaiViewModellOutput {
     case load(ArticlePresentation)
+    case showWebPage(url: String)
 }
 
 protocol DetailViewDelagate: AnyObject {

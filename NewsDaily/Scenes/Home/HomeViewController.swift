@@ -32,6 +32,12 @@ final class HomeViewController: UIViewController {
         viewModel.load()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.largeTitleDisplayMode =  .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -100,7 +106,6 @@ extension HomeViewController: UITableViewDelegate {
 //MARK: - UI Related
 extension HomeViewController {
     private func configureView() {
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "app_name".localized(with: "")
         view.backgroundColor = .systemBackground
     }
