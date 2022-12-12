@@ -1,2 +1,2 @@
 # NewsDaily
- A news app
+ A news app under development
