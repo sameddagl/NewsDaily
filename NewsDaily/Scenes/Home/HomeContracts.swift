@@ -21,6 +21,8 @@ enum HomeViewModelOutput {
     case startLoading
     case endLoading
     case didUploadWithNews(news: [ArticlePresentation])
+    case emptyState(message: String)
+    case removeEmptyState
     case didFailWithError(title: String, message: String)
 }
 

@@ -48,6 +48,13 @@ final class SearchViewModel: SearchViewModelPorotocol {
         self.articles.append(contentsOf: news.results)
         let articlePresentation = self.articles.map { ArticlePresentation(article: $0) }
         self.notify(.didUploadWithNews(news: articlePresentation))
+        
+        if articles.isEmpty {
+            notify(.showEmptyStateView(message: "No results found for \(query)"))
+        }
+        else {
+            notify(.removeEmptyStateView)
+        }
     }
     
     func newSearch() {

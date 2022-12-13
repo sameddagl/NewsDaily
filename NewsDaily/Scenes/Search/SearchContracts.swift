@@ -20,6 +20,8 @@ enum SearchViewModelOutput {
     case startLoading
     case endLoading
     case didUploadWithNews(news: [ArticlePresentation])
+    case showEmptyStateView(message: String)
+    case removeEmptyStateView
     case didFailWithError(title: String, message: String)
 }
 

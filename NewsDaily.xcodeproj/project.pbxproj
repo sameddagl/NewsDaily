@@ -51,6 +51,7 @@
 		2CC8F66829489F09000A1D9A /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66729489F09000A1D9A /* SearchBuilder.swift */; };
 		2CC8F66A29489F15000A1D9A /* SearchContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66929489F15000A1D9A /* SearchContracts.swift */; };
 		2CC8F66C29489F1D000A1D9A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66B29489F1D000A1D9A /* SearchViewModel.swift */; };
+		2CC8F66F2948D3AD000A1D9A /* NDEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66E2948D3AD000A1D9A /* NDEmptyStateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		2CC8F66729489F09000A1D9A /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
 		2CC8F66929489F15000A1D9A /* SearchContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContracts.swift; sourceTree = "<group>"; };
 		2CC8F66B29489F1D000A1D9A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		2CC8F66E2948D3AD000A1D9A /* NDEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDEmptyStateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 		2C16FE46293E65D700FF5BA4 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8F66D2948D3A3000A1D9A /* Views */,
 				2C69D0E8293F751000DFB6B3 /* Buttons */,
 				2C16FE90293E973100FF5BA4 /* Image Views */,
 				2C16FE8F293E972D00FF5BA4 /* Labels */,
@@ -364,6 +367,14 @@
 			path = "Sort Page";
 			sourceTree = "<group>";
 		};
+		2CC8F66D2948D3A3000A1D9A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2CC8F66E2948D3AD000A1D9A /* NDEmptyStateView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -450,6 +461,7 @@
 				2C16FE93293E974900FF5BA4 /* NDTitleLabel.swift in Sources */,
 				2C068171293F2BEF0085F1D3 /* UIViewController+Ext.swift in Sources */,
 				2C16FE6D293E76EE00FF5BA4 /* NetworkError.swift in Sources */,
+				2CC8F66F2948D3AD000A1D9A /* NDEmptyStateView.swift in Sources */,
 				2C16FE6B293E769600FF5BA4 /* Service.swift in Sources */,
 				2C16FE2D293E647100FF5BA4 /* AppDelegate.swift in Sources */,
 				2C16FE5E293E729800FF5BA4 /* HTTPEndpoint.swift in Sources */,

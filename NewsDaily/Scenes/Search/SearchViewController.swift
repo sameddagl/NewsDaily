@@ -21,6 +21,7 @@ class SearchViewController: UIViewController {
         configureView()
         createTableView()
         configureNavBar()
+        showEmptyStateView(with: "Please enter some text to search for articles", in: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +48,12 @@ extension SearchViewController: SearchViewDelegate {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+        case .showEmptyStateView(let message):
+            DispatchQueue.main.async {
+                self.showEmptyStateView(with: message, in: self.view)
+            }
+        case .removeEmptyStateView:
+            removeEmptyStateView()
         case .didFailWithError(let title, let message):
             print(title, message)
         }
@@ -100,6 +107,7 @@ extension SearchViewController: UISearchBarDelegate {
         guard let query = searchBar.text?.lowercased(), !query.isEmpty else {
             articles.removeAll()
             tableView.reloadData()
+            showEmptyStateView(with: "Please enter some text to search for articles", in: self.view)
             return
         }
         
@@ -111,6 +119,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         articles.removeAll()
         tableView.reloadData()
+        showEmptyStateView(with: "Please enter some text to search for articles", in: self.view)
     }
 }
 

@@ -9,6 +9,7 @@ import UIKit
 import SafariServices
 
 fileprivate var containerView: UIView?
+fileprivate var emptyStateView: NDEmptyStateView?
 
 extension UIViewController {
     func showLoadingScreen() {
@@ -48,5 +49,23 @@ extension UIViewController {
         vc.preferredControlTintColor = .label
         
         present(vc, animated: true)
+    }
+    
+    func showEmptyStateView(with message: String, in view: UIView) {
+        DispatchQueue.main.async {
+            emptyStateView?.removeFromSuperview()
+            
+            emptyStateView = NDEmptyStateView(message: message)
+            guard let emptyStateView = emptyStateView else { return }
+
+            emptyStateView.frame = view.safeAreaLayoutGuide.layoutFrame
+            view.addSubview(emptyStateView)
+        }
+    }
+    
+    func removeEmptyStateView() {
+        DispatchQueue.main.async {
+            emptyStateView?.removeFromSuperview()
+        }
     }
 }

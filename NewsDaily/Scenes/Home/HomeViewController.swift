@@ -11,6 +11,7 @@ import SDWebImage
 final class HomeViewController: UIViewController {
     //MARK: - UI Elements
     private var tableView: UITableView!
+    private var emptyStateView: UIView!
     
     //MARK: - Injections
     private var viewModel: HomeViewModelProtocol!
@@ -68,6 +69,12 @@ extension HomeViewController: HomeViewDelegate {
             SDImageCache.shared.clearMemory()
             self.news = news
             self.updateNews()
+        case .emptyState(let message):
+            DispatchQueue.main.async {
+                self.showEmptyStateView(with: message, in: self.view)
+            }
+        case .removeEmptyState:
+            removeEmptyStateView()
         case .didFailWithError(let title, let message):
             print(title, message)
         }
@@ -118,6 +125,7 @@ extension HomeViewController: UITableViewDelegate {
 //MARK: - UI Related
 extension HomeViewController {
     private func configureView() {
+        
         let rightButton = UIBarButtonItem(image: SFSymbols.sort, style: .done, target: self, action: #selector(sortTapped))
         navigationItem.rightBarButtonItem = rightButton
         

@@ -35,6 +35,24 @@ final class HomeViewModel: HomeViewModelProtocol {
         }
     }
     
+    private func updateData(with news: News) {
+        if news.results.count <= 0 {
+            hasMoreNews = false
+        }
+        
+        self.news.append(contentsOf: news.results)
+        let news = self.news.map{ ArticlePresentation(article: $0) }
+        self.notify(.didUploadWithNews(news: news))
+        
+        if self.news.isEmpty {
+            notify(.emptyState(message: "No news for the \(selectedCategory.rawValue.capitalized) category"))
+            return
+        }
+        else {
+            notify(.removeEmptyState)
+        }
+    }
+    
     func changeCategory(category: NewsCategories) {
         news.removeAll()
         currentPage = 1
@@ -68,16 +86,6 @@ final class HomeViewModel: HomeViewModelProtocol {
         //TODO
         let viewModel = DetailViewModel(article: news[index])
         delegate?.navigate(to: .detail(viewModel: viewModel))
-    }
-    
-    private func updateData(with news: News) {
-        if news.results.count <= 0 {
-            hasMoreNews = false
-        }
-        
-        self.news.append(contentsOf: news.results)
-        let news = self.news.map{ ArticlePresentation(article: $0) }
-        self.notify(.didUploadWithNews(news: news))
     }
     
     private func notify(_ output: HomeViewModelOutput) {
