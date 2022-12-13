@@ -169,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				2C16FE4A293E66AC00FF5BA4 /* Home */,
+				2C16FE4B293E66B500FF5BA4 /* Detail */,
 				2C16FE5A293E685100FF5BA4 /* Search */,
 				2C16FE53293E673800FF5BA4 /* Favorites */,
 			);
@@ -229,7 +230,6 @@
 				2C16FE54293E676B00FF5BA4 /* HomeViewController.swift */,
 				2C16FE86293E8F9800FF5BA4 /* HomeViewModel.swift */,
 				2C16FE8A293E8FC600FF5BA4 /* ArticlePresentation.swift */,
-				2C16FE4B293E66B500FF5BA4 /* Detail */,
 				2C69D0EB293F848400DFB6B3 /* Sort Page */,
 			);
 			path = Home;

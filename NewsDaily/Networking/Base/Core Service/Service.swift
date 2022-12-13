@@ -9,7 +9,6 @@ import UIKit
 
 protocol ServiceProtocol {
     func fetch<T: Decodable>(endPoint: HTTPEndpoint, completion: @escaping(Result<T, NetworkError>) -> Void)
-    func fetchImages(url: String, completion: @escaping(UIImage?) -> Void)
 }
 
 final class Service: ServiceProtocol {
@@ -67,47 +66,6 @@ final class Service: ServiceProtocol {
                 print(response.statusCode)
                 completion(.failure(.unexpectedStatusCode))
             }
-        }.resume()
-    }
-    
-    func fetchImages(url: String, completion: @escaping(UIImage?) -> Void) {
-        let key = NSString(string: url)
-        
-        if let image = cache.object(forKey: key) {
-            completion(image)
-            return
-        }
-        
-        guard let url = URL(string: url) else {
-            completion(nil)
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            if let _ = error {
-                completion(nil)
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completion(nil)
-                return
-            }
-            
-            guard let data = data else {
-                completion(nil)
-                return
-            }
-            
-            guard let image = UIImage(data: data) else {
-                completion(nil)
-                return
-            }
-            
-            self?.cache.setObject(image, forKey: key)
-            
-            completion(image)
-            
         }.resume()
     }
 }

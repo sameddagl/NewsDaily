@@ -7,11 +7,12 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 final class HomeNewsCell: UITableViewCell {
     static let reuseID = "HomeNewsCell"
     
-    private let articleImageView = NDCellImage()
+    private lazy var articleImageView = NDCellImage()
     private let articleTitleLabel = NDTitleLabel(alignment: .left, fontSize: 15)
     private let sourceTitleLabel = NDSecondaryLabel(alignment: .left)
     
@@ -30,12 +31,9 @@ final class HomeNewsCell: UITableViewCell {
         articleTitleLabel.text = article.title
         
         if let imageURL = article.urlToImage {
-            appContainer.service.fetchImages(url: imageURL) { [weak self] image in
-                guard let image = image else { return }
-                DispatchQueue.main.async {
-                    self?.articleImageView.image = image
-                }
-            }
+            articleImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
+            articleImageView.sd_imageTransition = .fade
+            articleImageView.sd_setImage(with: URL(string: imageURL), placeholderImage: SFSymbols.placeholderImage)
         }
         
         sourceTitleLabel.text = article.sourceName

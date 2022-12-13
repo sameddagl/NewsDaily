@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SearchViewController: UIViewController {
     private var tableView: UITableView!
@@ -17,6 +18,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SDImageCache.shared.clearMemory()
         configureView()
         createTableView()
         configureNavBar()
@@ -90,6 +92,7 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer?.invalidate()
+        self.viewModel.newSearch()
         
         guard let query = searchBar.text?.lowercased(), !query.isEmpty else {
             articles.removeAll()

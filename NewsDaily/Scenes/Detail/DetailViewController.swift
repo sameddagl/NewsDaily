@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DetailViewController: UIViewController {
     //MARK: - UI Elements
@@ -29,6 +30,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SDImageCache.shared.clearMemory()
         configureView()
         setupScrollView()
         layoutViews()
@@ -56,12 +58,9 @@ extension DetailViewController: DetailViewDelagate {
         switch output {
         case .load(let articlePresentation):
             if let imageURL = articlePresentation.urlToImage {
-                appContainer.service.fetchImages(url: imageURL) { [weak self] image in
-                    guard let image = image else { return }
-                    DispatchQueue.main.async {
-                        self?.articleImageView.image = image
-                    }
-                }
+                articleImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
+                articleImageView.sd_imageTransition = .fade
+                articleImageView.sd_setImage(with: URL(string: imageURL), placeholderImage: SFSymbols.placeholderImage)
             }
             
             titleLabel.text = articlePresentation.title

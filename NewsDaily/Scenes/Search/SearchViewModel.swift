@@ -23,7 +23,6 @@ final class SearchViewModel: SearchViewModelPorotocol {
     private var hasMoreNews = true
     
     func search(with q: String) {
-        articles.removeAll()
         query = q
         notify(.startLoading)
         newsService.searchFor(endPoint: .searchFor(q: query, page: currentPage)) { [weak self] result in
@@ -42,9 +41,18 @@ final class SearchViewModel: SearchViewModelPorotocol {
         if news.results.count <= 0 {
             self.hasMoreNews = false
         }
+        else {
+            self.hasMoreNews = true
+        }
+        
         self.articles.append(contentsOf: news.results)
         let articlePresentation = self.articles.map { ArticlePresentation(article: $0) }
         self.notify(.didUploadWithNews(news: articlePresentation))
+    }
+    
+    func newSearch() {
+        articles.removeAll()
+        currentPage = 1
     }
     
     func didPullToRefresh() {
