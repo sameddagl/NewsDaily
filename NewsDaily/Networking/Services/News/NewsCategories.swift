@@ -10,9 +10,13 @@ import Foundation
 enum NewsCategories: String {
     case business
     case entertainment
-    case general
+    case environment
+    case food
     case health
+    case politics
     case science
     case sports
     case technology
+    case top
+    case world
 }

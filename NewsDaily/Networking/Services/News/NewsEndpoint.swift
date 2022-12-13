@@ -8,11 +8,12 @@
 import Foundation
 
 enum NewsEndpoint: HTTPEndpoint {
-    //https://newsapi.org/v2/everything?q=bitcoin&apiKey=5505a723f936442a899ba1791dbd6794&language=tr&page=1&sortBy=popularity&searchIn=content
-    
+    //https://newsdata.io/api/1/news?apikey=pub_12891bbaa86f6767ce902a41954a6cdbd598d
+
     case fetchNews(category: NewsCategories, page: Int)
+    case searchFor(q: String)
     var path: String {
-        return Paths.everyThing
+        return Paths.latest
     }
     
     var params: [URLQueryItem] {
@@ -21,14 +22,17 @@ enum NewsEndpoint: HTTPEndpoint {
             return [
                 URLQueryItem(name: "apiKey", value: NetworkHelper.apiKey),
                 URLQueryItem(name: "language", value: Locale.current.languageCode),
+                URLQueryItem(name: "category", value: category.rawValue),
                 URLQueryItem(name: "page", value: String(page)),
-                URLQueryItem(name: "pageSize", value: String(30)),
-                URLQueryItem(name: "sortBy", value: "popularity"),
-                URLQueryItem(name: "searchIn", value: "content"),
-                URLQueryItem(name: "q", value: category.rawValue)
+                URLQueryItem(name: "domain", value: "haberturk, hurriyet, cnnturk, sozcu, aa_tr")
+            ]
+        case .searchFor(let q):
+            return [
+                URLQueryItem(name: "apiKey", value: NetworkHelper.apiKey),
+                URLQueryItem(name: "language", value: Locale.current.languageCode),
+//                URLQueryItem(name: "domain", value: "haberturk, hurriyet, cnnturk, sozcu, aa_tr"),
+                URLQueryItem(name: "q", value: q)
             ]
         }
     }
-    
-    
 }

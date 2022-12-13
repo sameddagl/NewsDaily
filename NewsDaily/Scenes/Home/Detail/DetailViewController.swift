@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class DetailViewController: UIViewController {
     //MARK: - UI Elements
@@ -16,7 +15,7 @@ class DetailViewController: UIViewController {
     private let titleLabel = NDTitleLabel(alignment: .left, fontSize: 20)
     private let descriptionLabel = NDBodyLabel(alignment: .left)
     private let sourceNameLabel = NDSecondaryLabel(alignment: .right)
-    private var actionButton = NDActionButton(title: "Read more", backgroundColor: .systemGray6)
+    private var actionButton = NDActionButton(title: "more_button".localized(with: ""), backgroundColor: .systemGray6)
     
     //MARK: - Injections
     private var viewModel: DetailViewModelProtocol!
@@ -56,7 +55,18 @@ extension DetailViewController: DetailViewDelagate {
     func handleOutput(_ output: DetaiViewModellOutput) {
         switch output {
         case .load(let articlePresentation):
-            articleImageView.sd_setImage(with: URL(string: articlePresentation.urlToImage!), placeholderImage: SFSymbols.placeholderImage)
+            if let urlToImage = articlePresentation.urlToImage {
+                appContainer.service.fetchImages(url: urlToImage) { [weak self] image in
+                    DispatchQueue.main.async {
+                        guard let image = image else {
+                            print("no image")
+                            return }
+                        self?.articleImageView.image = image
+                    }
+                }
+            }
+            
+            
             titleLabel.text = articlePresentation.title
             sourceNameLabel.text = articlePresentation.sourceName
             descriptionLabel.text = articlePresentation.articleDescription
@@ -85,13 +95,13 @@ extension DetailViewController {
         containerView.snp.makeConstraints { make in
             make.top.leading.bottom.trailing.equalTo(scrollView)
             make.width.equalTo(scrollView.snp.width)
-            make.height.equalTo(600)
         }
     }
     
     func layoutViews() {
-        articleImageView.backgroundColor = .red
-        articleImageView.contentMode = .scaleToFill
+        articleImageView.tintColor = .secondarySystemFill
+        articleImageView.contentMode = .scaleAspectFit
+        articleImageView.image = SFSymbols.placeholderImage
         containerView.addSubview(articleImageView)
         
         let padding: CGFloat = 20
@@ -99,7 +109,7 @@ extension DetailViewController {
         articleImageView.snp.makeConstraints { make in
             make.top.equalTo(containerView)
             make.width.equalTo(containerView.snp.width)
-            make.height.equalTo(containerView.snp.width).multipliedBy(0.53)
+            make.height.equalTo(containerView.snp.width).multipliedBy(0.6)
         }
         
         containerView.addSubview(titleLabel)
@@ -132,6 +142,10 @@ extension DetailViewController {
             make.top.equalTo(sourceNameLabel.snp.bottom).offset(padding)
             make.width.equalTo(100)
             make.height.equalTo(40)
+        }
+        
+        containerView.snp.makeConstraints { make in
+            make.bottom.equalTo(actionButton.snp.bottom).offset(100)
         }
     }
     

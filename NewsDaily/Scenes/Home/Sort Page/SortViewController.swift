@@ -17,8 +17,8 @@ class SortViewController: UIViewController {
     private let doneButton = NDActionButton(title: "Done", backgroundColor: .clear)
     
     var delegate: SortViewDelegate!
-    private var sorts = ["General", "Business", "Entartainment", "Sports", "Technology", "Health", "Science"]
-    private var categories: [NewsCategories] = [.general, .business, .entertainment, .sports, .technology, .health, .science]
+    private var sorts = ["Top", "World", "Business", "Technology", "Entartainment", "Sports", "Environment", "Food", "Health", "Politics", "Science"]
+    private var categories: [NewsCategories] = [.top, .world, .business, .technology, .entertainment, .sports, .environment, .food, .health, .politics, .science]
     
     override func viewDidLoad() {
         super.viewDidLoad()

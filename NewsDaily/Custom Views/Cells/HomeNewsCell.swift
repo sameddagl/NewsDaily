@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import SDWebImage
 
 final class HomeNewsCell: UITableViewCell {
     static let reuseID = "HomeNewsCell"
@@ -21,11 +20,25 @@ final class HomeNewsCell: UITableViewCell {
         configure()
     }
     
+    override func prepareForReuse() {
+        articleTitleLabel.text = ""
+        sourceTitleLabel.text = ""
+        articleImageView.image = SFSymbols.placeholderImage
+    }
+    
     func set(article: ArticlePresentation) {
         articleTitleLabel.text = article.title
         
         if article.urlToImage != nil {
-            articleImageView.sd_setImage(with: URL(string: article.urlToImage!), placeholderImage: SFSymbols.placeholderImage)
+            appContainer.service.fetchImages(url: article.urlToImage!) { [weak self] image in
+                guard let image = image else {
+                    print("no image")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.articleImageView.image = image
+                }
+            }
         }
         
         sourceTitleLabel.text = article.sourceName

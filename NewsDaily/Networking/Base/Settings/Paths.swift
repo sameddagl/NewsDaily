@@ -8,6 +8,6 @@
 import Foundation
 
 enum Paths {
-    static let everyThing = "/v2/everything"
-    static let topHeadlines = "/v2/top-headlines"
+    static let latest = "/api/1/news"
 }
+//https://newsdata.io/api/1/news?apikey=pub_12891bbaa86f6767ce902a41954a6cdbd598d

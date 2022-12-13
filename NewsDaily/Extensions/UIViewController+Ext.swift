@@ -40,8 +40,13 @@ extension UIViewController {
     
     func showSafariView(with url: String) {
         guard let url = URL(string: url) else { return }
-        let vc = SFSafariViewController(url: url)
+        
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = true
+        
+        let vc = SFSafariViewController(url: url, configuration: configuration)
         vc.preferredControlTintColor = .label
+        
         present(vc, animated: true)
     }
 }

@@ -16,14 +16,6 @@ final class AppRouter {
     
     func start() {
         let tabBarVC = UITabBarController()
-//        let appereance = UITabBarAppearance()
-//        appereance.configureWithOpaqueBackground()
-//        
-//        if #available(iOS 15.0, *) {
-//            tabBarVC.tabBar.scrollEdgeAppearance = appereance
-//        } else {
-//            tabBarVC.tabBar.standardAppearance = appereance
-//        }
         
         UITabBar.appearance().tintColor = .label
         UINavigationBar.appearance().tintColor = .label

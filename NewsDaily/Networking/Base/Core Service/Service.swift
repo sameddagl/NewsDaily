@@ -5,13 +5,16 @@
 //  Created by Samed Dağlı on 5.12.2022.
 //
 
-import Foundation
+import UIKit
 
 protocol ServiceProtocol {
     func fetch<T: Decodable>(endPoint: HTTPEndpoint, completion: @escaping(Result<T, NetworkError>) -> Void)
+    func fetchImages(url: String, completion: @escaping(UIImage?) -> Void)
 }
 
 final class Service: ServiceProtocol {
+    private var cache = NSCache<NSString, UIImage>()
+    
     func fetch<T: Decodable>(endPoint: HTTPEndpoint, completion: @escaping (Result<T, NetworkError>) -> Void) {
         var components = URLComponents()
         components.scheme = endPoint.scheme
@@ -23,6 +26,8 @@ final class Service: ServiceProtocol {
             completion(.failure(.badURL))
             return
         }
+        
+        print(url)
                 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endPoint.method.rawValue
@@ -59,8 +64,51 @@ final class Service: ServiceProtocol {
             case 401:
                 completion(.failure(.unauthorized))
             default:
-                 completion(.failure(.unexpectedStatusCode))
+                print(response.statusCode)
+                completion(.failure(.unexpectedStatusCode))
             }
+        }.resume()
+    }
+    
+    func fetchImages(url: String, completion: @escaping(UIImage?) -> Void) {
+        let key = NSString(string: url)
+        
+        if let image = cache.object(forKey: key) {
+            completion(image)
+            print("cached")
+            return
+        }
+        
+        guard let url = URL(string: url) else {
+            completion(nil)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            if let _ = error {
+                completion(nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+            
+            guard let image = UIImage(data: data) else {
+                completion(nil)
+                return
+            }
+            
+            self?.cache.setObject(image, forKey: key)
+            
+            completion(image)
+            
         }.resume()
     }
 }

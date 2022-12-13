@@ -15,14 +15,13 @@ protocol HTTPEndpoint {
     var method: HTTPMethod { get }
 }
 
-
 extension HTTPEndpoint {
     var scheme: String {
         return "https"
     }
     
     var host: String {
-        return "newsapi.org"
+        return "newsdata.io"
     }
     
     var method: HTTPMethod {

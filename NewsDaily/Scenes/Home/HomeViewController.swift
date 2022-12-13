@@ -88,8 +88,10 @@ extension HomeViewController: HomeViewDelegate {
 
 extension HomeViewController: SortViewDelegate {
     func didSelectCategory(category: NewsCategories) {
+        if !news.isEmpty {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
         viewModel.changeCategory(category: category)
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 }
 
@@ -136,7 +138,6 @@ extension HomeViewController {
     private func configureDataSource() {
         dataSource = UITableViewDiffableDataSource<Int, ArticlePresentation>(tableView: tableView, cellProvider: { tableView, indexPath, article in
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
-            let article = self.news[indexPath.row]
             cell.set(article: article)
             return cell
         })
