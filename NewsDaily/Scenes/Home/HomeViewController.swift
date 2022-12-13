@@ -57,10 +57,9 @@ extension HomeViewController: HomeViewDelegate {
     func handleOutputs(_ output: HomeViewModelOutput) {
         switch output {
         case .startLoading:
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.beginRefreshing()
-            }
+            showLoadingScreen()
         case .endLoading:
+            dismissLoadingScreen()
             DispatchQueue.main.async {
                 self.tableView.refreshControl?.endRefreshing()
             }

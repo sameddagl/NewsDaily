@@ -29,12 +29,9 @@ final class HomeNewsCell: UITableViewCell {
     func set(article: ArticlePresentation) {
         articleTitleLabel.text = article.title
         
-        if article.urlToImage != nil {
-            appContainer.service.fetchImages(url: article.urlToImage!) { [weak self] image in
-                guard let image = image else {
-                    print("no image")
-                    return
-                }
+        if let imageURL = article.urlToImage {
+            appContainer.service.fetchImages(url: imageURL) { [weak self] image in
+                guard let image = image else { return }
                 DispatchQueue.main.async {
                     self?.articleImageView.image = image
                 }

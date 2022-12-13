@@ -11,7 +11,7 @@ enum NewsEndpoint: HTTPEndpoint {
     //https://newsdata.io/api/1/news?apikey=pub_12891bbaa86f6767ce902a41954a6cdbd598d
 
     case fetchNews(category: NewsCategories, page: Int)
-    case searchFor(q: String)
+    case searchFor(q: String, page: Int)
     var path: String {
         return Paths.latest
     }
@@ -26,11 +26,11 @@ enum NewsEndpoint: HTTPEndpoint {
                 URLQueryItem(name: "page", value: String(page)),
                 URLQueryItem(name: "domain", value: "haberturk, hurriyet, cnnturk, sozcu, aa_tr")
             ]
-        case .searchFor(let q):
+        case .searchFor(let q, let page):
             return [
                 URLQueryItem(name: "apiKey", value: NetworkHelper.apiKey),
                 URLQueryItem(name: "language", value: Locale.current.languageCode),
-//                URLQueryItem(name: "domain", value: "haberturk, hurriyet, cnnturk, sozcu, aa_tr"),
+                URLQueryItem(name: "page", value: String(page)),
                 URLQueryItem(name: "q", value: q)
             ]
         }

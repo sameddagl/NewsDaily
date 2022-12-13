@@ -48,6 +48,9 @@
 		2C69D0E7293F5C8D00DFB6B3 /* DetailPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E6293F5C8D00DFB6B3 /* DetailPresentation.swift */; };
 		2C69D0EA293F752000DFB6B3 /* NDActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */; };
 		2C69D0ED293F84A500DFB6B3 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0EC293F84A500DFB6B3 /* SortViewController.swift */; };
+		2CC8F66829489F09000A1D9A /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66729489F09000A1D9A /* SearchBuilder.swift */; };
+		2CC8F66A29489F15000A1D9A /* SearchContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66929489F15000A1D9A /* SearchContracts.swift */; };
+		2CC8F66C29489F1D000A1D9A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66B29489F1D000A1D9A /* SearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +96,9 @@
 		2C69D0E6293F5C8D00DFB6B3 /* DetailPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresentation.swift; sourceTree = "<group>"; };
 		2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDActionButton.swift; sourceTree = "<group>"; };
 		2C69D0EC293F84A500DFB6B3 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
+		2CC8F66729489F09000A1D9A /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
+		2CC8F66929489F15000A1D9A /* SearchContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContracts.swift; sourceTree = "<group>"; };
+		2CC8F66B29489F1D000A1D9A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,7 +267,10 @@
 		2C16FE5A293E685100FF5BA4 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				2CC8F66729489F09000A1D9A /* SearchBuilder.swift */,
+				2CC8F66929489F15000A1D9A /* SearchContracts.swift */,
 				2C16FE5B293E686500FF5BA4 /* SearchViewController.swift */,
+				2CC8F66B29489F1D000A1D9A /* SearchViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -453,14 +462,17 @@
 				2C16FE73293E7C4600FF5BA4 /* Paths.swift in Sources */,
 				2C16FE71293E79D800FF5BA4 /* NewsEndpoint.swift in Sources */,
 				2C16FE5C293E686500FF5BA4 /* SearchViewController.swift in Sources */,
+				2CC8F66C29489F1D000A1D9A /* SearchViewModel.swift in Sources */,
 				2C16FE50293E66D900FF5BA4 /* AppContainer.swift in Sources */,
 				2C16FE76293E7D9700FF5BA4 /* NetworkHelper.swift in Sources */,
 				2C16FE2F293E647100FF5BA4 /* SceneDelegate.swift in Sources */,
+				2CC8F66829489F09000A1D9A /* SearchBuilder.swift in Sources */,
 				2C69D0E7293F5C8D00DFB6B3 /* DetailPresentation.swift in Sources */,
 				2C16FE4E293E66D200FF5BA4 /* AppRouter.swift in Sources */,
 				2C69D0E5293F5C8400DFB6B3 /* DetailViewModel.swift in Sources */,
 				2C16FE69293E767700FF5BA4 /* HTTPMethod.swift in Sources */,
 				2C16FE55293E676B00FF5BA4 /* HomeViewController.swift in Sources */,
+				2CC8F66A29489F15000A1D9A /* SearchContracts.swift in Sources */,
 				2C16FE87293E8F9800FF5BA4 /* HomeViewModel.swift in Sources */,
 				2C16FE89293E8FA100FF5BA4 /* HomeContracts.swift in Sources */,
 				2C16FE8D293E970300FF5BA4 /* HomeNewsCell.swift in Sources */,

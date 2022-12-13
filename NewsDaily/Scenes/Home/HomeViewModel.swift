@@ -23,7 +23,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     func load() {
         notify(.startLoading)
-        newsService.fetchNews(endPoint: NewsEndpoint.fetchNews(category: selectedCategory, page: currentPage)) { [weak self] result in
+        newsService.fetchNews(endPoint: .fetchNews(category: selectedCategory, page: currentPage)) { [weak self] result in
             guard let self = self else { return }
             self.notify(.endLoading)
             switch result {

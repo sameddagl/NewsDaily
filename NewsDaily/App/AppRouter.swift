@@ -22,8 +22,10 @@ final class AppRouter {
         
         let homeScreen = HomeBuilder.make()
         homeScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.home, selectedImage: SFSymbols.homeFill)
-        let searchScreen = UINavigationController(rootViewController: SearchViewController())
+        
+        let searchScreen = SearchBuilder.make()
         searchScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.search, selectedImage: nil)
+        
         let favoritesScreen = UINavigationController(rootViewController: FavoritesViewController())
         favoritesScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.favorites, selectedImage: SFSymbols.favoritesFill)
         

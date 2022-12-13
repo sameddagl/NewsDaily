@@ -28,7 +28,7 @@ final class Service: ServiceProtocol {
         }
         
         print(url)
-                
+                        
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endPoint.method.rawValue
         
@@ -75,7 +75,6 @@ final class Service: ServiceProtocol {
         
         if let image = cache.object(forKey: key) {
             completion(image)
-            print("cached")
             return
         }
         

@@ -18,7 +18,6 @@ final class DetailViewModel: DetailViewModelProtocol {
     
     func load() {
         let detailPresentation = ArticlePresentation(article: article)
-        print(article.link)
         notify(.load(detailPresentation))
     }
     

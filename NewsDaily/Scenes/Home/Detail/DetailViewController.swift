@@ -55,17 +55,14 @@ extension DetailViewController: DetailViewDelagate {
     func handleOutput(_ output: DetaiViewModellOutput) {
         switch output {
         case .load(let articlePresentation):
-            if let urlToImage = articlePresentation.urlToImage {
-                appContainer.service.fetchImages(url: urlToImage) { [weak self] image in
+            if let imageURL = articlePresentation.urlToImage {
+                appContainer.service.fetchImages(url: imageURL) { [weak self] image in
+                    guard let image = image else { return }
                     DispatchQueue.main.async {
-                        guard let image = image else {
-                            print("no image")
-                            return }
                         self?.articleImageView.image = image
                     }
                 }
             }
-            
             
             titleLabel.text = articlePresentation.title
             sourceNameLabel.text = articlePresentation.sourceName
