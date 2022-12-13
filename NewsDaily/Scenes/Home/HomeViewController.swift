@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class HomeViewController: UIViewController {
     //MARK: - UI Elements
@@ -64,6 +65,7 @@ extension HomeViewController: HomeViewDelegate {
                 self.tableView.refreshControl?.endRefreshing()
             }
         case .didUploadWithNews(let news):
+            SDImageCache.shared.clearMemory()
             self.news = news
             self.updateNews()
         case .didFailWithError(let title, let message):

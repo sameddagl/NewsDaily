@@ -39,6 +39,7 @@ final class HomeViewModel: HomeViewModelProtocol {
         news.removeAll()
         currentPage = 1
         selectedCategory = category
+        hasMoreNews = true
         load()
     }
 

@@ -18,10 +18,13 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SDImageCache.shared.clearMemory()
         configureView()
         createTableView()
         configureNavBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        SDImageCache.shared.clearMemory()
     }
     
     @objc private func didPullToRefresh() {

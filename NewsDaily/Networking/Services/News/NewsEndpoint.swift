@@ -24,7 +24,6 @@ enum NewsEndpoint: HTTPEndpoint {
                 URLQueryItem(name: "language", value: Locale.current.languageCode),
                 URLQueryItem(name: "category", value: category.rawValue),
                 URLQueryItem(name: "page", value: String(page)),
-                URLQueryItem(name: "domain", value: "haberturk, hurriyet, cnnturk, sozcu, aa_tr")
             ]
         case .searchFor(let q, let page):
             return [
