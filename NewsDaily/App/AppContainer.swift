@@ -12,5 +12,4 @@ let appContainer = AppContainer()
 final class AppContainer {
     let service = Service()
     let newsService = NewsService(service: Service())
-    let topHeadlinesService = TopHeadlinesService(service: Service())
 }

@@ -25,6 +25,8 @@ final class NDCellImage: UIImageView {
         tintColor = .secondarySystemFill
         
         contentMode = .scaleAspectFill
+        
+        image = SFSymbols.placeholderImage
     }
     
     required init?(coder: NSCoder) {

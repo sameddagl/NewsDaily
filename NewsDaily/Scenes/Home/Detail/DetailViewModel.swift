@@ -22,7 +22,7 @@ final class DetailViewModel: DetailViewModelProtocol {
     }
     
     func requestWebPage() {
-        notify(.showWebPage(url: article.url))
+        notify(.showWebPage(url: article.link))
     }
     
     private func notify(_ output: DetaiViewModellOutput) {

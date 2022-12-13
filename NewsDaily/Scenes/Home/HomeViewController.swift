@@ -38,6 +38,14 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    @objc private func sortTapped() {
+        viewModel.didSelectToSort()
+    }
+    
+    @objc private func didPullToRefresh() {
+        viewModel.didPullToRefresh()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -49,16 +57,15 @@ extension HomeViewController: HomeViewDelegate {
     func handleOutputs(_ output: HomeViewModelOutput) {
         switch output {
         case .startLoading:
-            self.showLoadingScreen()
+            showLoadingScreen()
         case .endLoading:
-            self.dismissLoadingScreen()
+            dismissLoadingScreen()
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
+            }
         case .didUploadWithNews(let news):
             self.news = news
             self.updateNews()
-        case .pagination:
-            break
-        case .refreshNews:
-            break
         case .didFailWithError(let title, let message):
             print(title, message)
         }
@@ -69,13 +76,28 @@ extension HomeViewController: HomeViewDelegate {
         case .detail(let viewModel):
             let vc = DetailBuilder.make(viewModel: viewModel)
             navigationController?.pushViewController(vc, animated: true)
+        case .sort:
+            let vc = SortViewController()
+            vc.delegate = self
+            vc.modalTransitionStyle = .crossDissolve
+            present(vc, animated: true)
         }
+    }
+}
+
+extension HomeViewController: SortViewDelegate {
+    func didSelectCategory(category: NewsCategories) {
+        if !news.isEmpty {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
+        viewModel.changeCategory(category: category)
     }
 }
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.selectItem(at: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -89,23 +111,14 @@ extension HomeViewController: UITableViewDelegate {
         
         viewModel.pagination(height: height, offset: offset, contentHeight: contentHeight)
     }
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "News"
-//    }
-//
-//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        guard let header = view as? UITableViewHeaderFooterView else { return }
-//        header.textLabel?.textColor = UIColor.label
-//        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 25)
-//        header.textLabel?.frame = .init(x: 20, y: 0, width: header.frame.width, height: header.frame.height)
-//        header.textLabel?.textAlignment = .left
-//    }
 }
 
 //MARK: - UI Related
 extension HomeViewController {
     private func configureView() {
+        let rightButton = UIBarButtonItem(image: SFSymbols.sort, style: .done, target: self, action: #selector(sortTapped))
+        navigationItem.rightBarButtonItem = rightButton
+        
         navigationItem.title = "app_name".localized(with: "")
         view.backgroundColor = .systemBackground
     }
@@ -115,12 +128,15 @@ extension HomeViewController {
         tableView.delegate = self
         tableView.register(HomeNewsCell.self, forCellReuseIdentifier: HomeNewsCell.reuseID)
         view.addSubview(tableView)
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
     
     private func configureDataSource() {
         dataSource = UITableViewDiffableDataSource<Int, ArticlePresentation>(tableView: tableView, cellProvider: { tableView, indexPath, article in
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeNewsCell.reuseID, for: indexPath) as! HomeNewsCell
-            let article = self.news[indexPath.row]
             cell.set(article: article)
             return cell
         })
