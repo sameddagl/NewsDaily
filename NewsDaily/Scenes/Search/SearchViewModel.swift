@@ -46,6 +46,9 @@ final class SearchViewModel: SearchViewModelPorotocol {
         }
         
         self.articles.append(contentsOf: news.results)
+        
+        self.articles = self.articles.removeDuplicates()
+
         let articlePresentation = self.articles.map { ArticlePresentation(article: $0) }
         self.notify(.didUploadWithNews(news: articlePresentation))
         

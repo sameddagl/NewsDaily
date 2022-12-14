@@ -41,6 +41,9 @@ final class HomeViewModel: HomeViewModelProtocol {
         }
         
         self.news.append(contentsOf: news.results)
+        
+        self.news = self.news.removeDuplicates()
+        
         let news = self.news.map{ ArticlePresentation(article: $0) }
         self.notify(.didUploadWithNews(news: news))
         
@@ -83,7 +86,8 @@ final class HomeViewModel: HomeViewModelProtocol {
     }
     
     func selectItem(at index: Int) {
-        //TODO
+        print(index)
+        print(news[index].title)
         let viewModel = DetailViewModel(article: news[index])
         delegate?.navigate(to: .detail(viewModel: viewModel))
     }

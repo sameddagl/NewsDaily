@@ -14,7 +14,7 @@ struct News: Decodable {
 }
 
 // MARK: - Article
-struct Article: Decodable {
+struct Article: Decodable, Equatable {
     let title: String
     let link: String
     let keywords: [String]?
