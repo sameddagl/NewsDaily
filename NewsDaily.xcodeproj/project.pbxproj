@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2C068171293F2BEF0085F1D3 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C068170293F2BEF0085F1D3 /* UIViewController+Ext.swift */; };
+		2C115ABD29506570008B1FA6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2C115ABC29506570008B1FA6 /* SnapKit */; };
+		2C115AC329506656008B1FA6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C115AC229506656008B1FA6 /* SDWebImage */; };
 		2C16FE2D293E647100FF5BA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE2C293E647100FF5BA4 /* AppDelegate.swift */; };
 		2C16FE2F293E647100FF5BA4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE2E293E647100FF5BA4 /* SceneDelegate.swift */; };
 		2C16FE36293E647200FF5BA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C16FE35293E647200FF5BA4 /* Assets.xcassets */; };
 		2C16FE39293E647200FF5BA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C16FE37293E647200FF5BA4 /* LaunchScreen.storyboard */; };
-		2C16FE42293E654C00FF5BA4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2C16FE41293E654C00FF5BA4 /* SnapKit */; };
 		2C16FE4E293E66D200FF5BA4 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE4D293E66D200FF5BA4 /* AppRouter.swift */; };
 		2C16FE50293E66D900FF5BA4 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE4F293E66D900FF5BA4 /* AppContainer.swift */; };
 		2C16FE52293E670A00FF5BA4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE51293E670A00FF5BA4 /* Constants.swift */; };
@@ -40,7 +41,6 @@
 		2C16FE93293E974900FF5BA4 /* NDTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE92293E974900FF5BA4 /* NDTitleLabel.swift */; };
 		2C16FE96293E984E00FF5BA4 /* NDBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE95293E984E00FF5BA4 /* NDBodyLabel.swift */; };
 		2C16FE98293E98D200FF5BA4 /* NDCellImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C16FE97293E98D200FF5BA4 /* NDCellImage.swift */; };
-		2C16FE9E293E9FF700FF5BA4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C16FE9D293E9FF700FF5BA4 /* SDWebImage */; };
 		2C69D0DA293F2FDF00DFB6B3 /* NDSecondaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0D9293F2FDF00DFB6B3 /* NDSecondaryLabel.swift */; };
 		2C69D0E1293F5C5000DFB6B3 /* DetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E0293F5C5000DFB6B3 /* DetailBuilder.swift */; };
 		2C69D0E3293F5C7B00DFB6B3 /* DetailContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E2293F5C7B00DFB6B3 /* DetailContracts.swift */; };
@@ -110,8 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C16FE9E293E9FF700FF5BA4 /* SDWebImage in Frameworks */,
-				2C16FE42293E654C00FF5BA4 /* SnapKit in Frameworks */,
+				2C115AC329506656008B1FA6 /* SDWebImage in Frameworks */,
+				2C115ABD29506570008B1FA6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,8 +395,8 @@
 			);
 			name = NewsDaily;
 			packageProductDependencies = (
-				2C16FE41293E654C00FF5BA4 /* SnapKit */,
-				2C16FE9D293E9FF700FF5BA4 /* SDWebImage */,
+				2C115ABC29506570008B1FA6 /* SnapKit */,
+				2C115AC229506656008B1FA6 /* SDWebImage */,
 			);
 			productName = NewsDaily;
 			productReference = 2C16FE29293E647100FF5BA4 /* NewsDaily.app */;
@@ -428,8 +428,8 @@
 			);
 			mainGroup = 2C16FE20293E647100FF5BA4;
 			packageReferences = (
-				2C16FE40293E654C00FF5BA4 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				2C16FE9C293E9FF700FF5BA4 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2C115ABB29506570008B1FA6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2C115AC129506656008B1FA6 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 2C16FE2A293E647100FF5BA4 /* Products */;
 			projectDirPath = "";
@@ -731,7 +731,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2C16FE40293E654C00FF5BA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		2C115ABB29506570008B1FA6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -739,9 +739,9 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		2C16FE9C293E9FF700FF5BA4 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		2C115AC129506656008B1FA6 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
@@ -750,14 +750,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2C16FE41293E654C00FF5BA4 /* SnapKit */ = {
+		2C115ABC29506570008B1FA6 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2C16FE40293E654C00FF5BA4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 2C115ABB29506570008B1FA6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		2C16FE9D293E9FF700FF5BA4 /* SDWebImage */ = {
+		2C115AC229506656008B1FA6 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2C16FE9C293E9FF700FF5BA4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 2C115AC129506656008B1FA6 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
