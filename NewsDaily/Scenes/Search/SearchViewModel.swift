@@ -11,9 +11,11 @@ final class SearchViewModel: SearchViewModelPorotocol {
     weak var delegate: SearchViewDelegate?
     
     private var newsService: NewsServiceProtocol
+    private weak var coordinator: SearchCoordinator?
     
-    init(newsService: NewsServiceProtocol) {
+    init(newsService: NewsServiceProtocol, coordinator: SearchCoordinator) {
         self.newsService = newsService
+        self.coordinator = coordinator
     }
     
     private var articles = [Article]()
@@ -82,8 +84,14 @@ final class SearchViewModel: SearchViewModelPorotocol {
     
     func selectItem(at index: Int) {
         let selectedArticle = articles[index]
-        let viewModel = DetailViewModel(article: selectedArticle)
-        delegate?.navigate(to: .detail(viewModel: viewModel))
+        navigate(to: .detail(article: selectedArticle))
+    }
+    
+    private func navigate(to root: SearchViewModelRoute) {
+        switch root {
+        case .detail(let article):
+            coordinator?.goToDetail(article: article)
+        }
     }
     
     private func notify(_ output: SearchViewModelOutput) {

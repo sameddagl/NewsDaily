@@ -10,9 +10,11 @@ import Foundation
 final class HomeViewModel: HomeViewModelProtocol {
     weak var delegate: HomeViewDelegate?
     private var newsService: NewsServiceProtocol
+    private weak var coordinator: HomeCoordinator?
     
-    init(newsService: NewsServiceProtocol) {
+    init(newsService: NewsServiceProtocol, coordinator: HomeCoordinator) {
         self.newsService = newsService
+        self.coordinator = coordinator
     }
     
     private var news = [Article]()
@@ -62,9 +64,9 @@ final class HomeViewModel: HomeViewModelProtocol {
         selectedCategory = category
         hasMoreNews = true
         load()
+        notify(.changeCategory)
     }
 
-    
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat) {
         if height + offset - 50 >= contentHeight {
             if hasMoreNews {
@@ -74,7 +76,6 @@ final class HomeViewModel: HomeViewModelProtocol {
         }
     }
     
-    
     func didPullToRefresh() {
         news.removeAll()
         currentPage = 1
@@ -82,19 +83,30 @@ final class HomeViewModel: HomeViewModelProtocol {
     }
     
     func didSelectToSort() {
-        delegate?.navigate(to: .sort)
+        navigate(to: .sort)
     }
     
     func selectItem(at index: Int) {
-        print(index)
-        print(news[index].title)
-        let viewModel = DetailViewModel(article: news[index])
-        delegate?.navigate(to: .detail(viewModel: viewModel))
+        let selectedArticle = news[index]
+        navigate(to: .detail(article: selectedArticle))
     }
     
+    private func navigate(to route: HomeViewModelRoute) {
+        switch route {
+        case .detail(let article):
+            coordinator?.goToDetail(article: article)
+        case .sort:
+            coordinator?.goToSort(delegate: self)
+        }
+    }
+
     private func notify(_ output: HomeViewModelOutput) {
         delegate?.handleOutputs(output)
+    } 
+}
+
+extension HomeViewModel: SortViewDelegate {
+    func didSelectCategory(category: NewsCategories) {
+        changeCategory(category: category)
     }
-    
-    
 }

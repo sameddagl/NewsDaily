@@ -19,12 +19,7 @@ class DetailViewController: UIViewController {
     private var actionButton = NDActionButton(title: "more_button".localized(with: ""), backgroundColor: .systemGray6)
     
     //MARK: - Injections
-    private var viewModel: DetailViewModelProtocol!
-    
-    init(viewModel: DetailViewModelProtocol!) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
-    }
+    var viewModel: DetailViewModelProtocol!
     
     //MARK: - Properties
     
@@ -46,11 +41,6 @@ class DetailViewController: UIViewController {
     @objc func readMoreTapped() {
         viewModel.requestWebPage()
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
 }
 
 extension DetailViewController: DetailViewDelagate {
@@ -66,7 +56,7 @@ extension DetailViewController: DetailViewDelagate {
             titleLabel.text = articlePresentation.title
             sourceNameLabel.text = articlePresentation.sourceName
             descriptionLabel.text = articlePresentation.articleDescription
-        case .showWebPage(let url):
+        case .showSafariView(let url):
             showSafariView(with: url)
         }
     }

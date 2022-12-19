@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SortViewDelegate {
+protocol SortViewDelegate: AnyObject {
     func didSelectCategory(category: NewsCategories)
 }
 
@@ -16,7 +16,7 @@ class SortViewController: UIViewController {
     private var containerView: UIView!
     private let doneButton = NDActionButton(title: "Done", backgroundColor: .clear)
     
-    var delegate: SortViewDelegate!
+    weak var delegate: SortViewDelegate!
     private var sorts = ["Top", "World", "Business", "Technology", "Entartainment", "Sports", "Environment", "Food", "Health", "Politics", "Science"]
     private var categories: [NewsCategories] = [.top, .world, .business, .technology, .entertainment, .sports, .environment, .food, .health, .politics, .science]
     

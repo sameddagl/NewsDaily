@@ -58,14 +58,7 @@ extension SearchViewController: SearchViewDelegate {
             print(title, message)
         }
     }
-    
-    func navigate(to route: SearchViewModelRoute) {
-        switch route {
-        case .detail(let viewModel):
-            let vc = DetailBuilder.make(viewModel: viewModel)
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
+
 }
 
 extension SearchViewController: UITableViewDataSource {
