@@ -1,37 +1,33 @@
 //
-//  AppRouter.swift
+//  TabBarVC.swift
 //  NewsDaily
 //
-//  Created by Samed Dağlı on 5.12.2022.
+//  Created by Samed Dağlı on 19.12.2022.
 //
 
 import UIKit
 
-final class AppRouter {
-    var window: UIWindow?
+final class TabBarVC: UITabBarController {
     
-    init(window: UIWindow? = nil) {
-        self.window = window
-    }
+    let homeCoordinator = HomeCoordinator(navigationController: UINavigationController())
+    let searchCoordinator = SearchCoordinator(navigationController: UINavigationController())
     
-    func start() {
-        let tabBarVC = UITabBarController()
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
         UITabBar.appearance().tintColor = .label
         UINavigationBar.appearance().tintColor = .label
         
-        let homeScreen = HomeBuilder.make()
+        let homeScreen = homeCoordinator.navigationController
         homeScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.home, selectedImage: SFSymbols.homeFill)
         
-        let searchScreen = SearchBuilder.make()
+        let searchScreen = searchCoordinator.navigationController
         searchScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.search, selectedImage: nil)
         
         let favoritesScreen = UINavigationController(rootViewController: FavoritesViewController())
         favoritesScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.favorites, selectedImage: SFSymbols.favoritesFill)
         
-        tabBarVC.setViewControllers([homeScreen, searchScreen, favoritesScreen], animated: true)
-        
-        window?.rootViewController = tabBarVC
-        window?.makeKeyAndVisible()
+        homeCoordinator.start()
+        searchCoordinator.start()
+        setViewControllers([homeScreen, searchScreen, favoritesScreen], animated: true)
     }
 }

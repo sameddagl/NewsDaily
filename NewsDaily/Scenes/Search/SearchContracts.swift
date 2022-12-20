@@ -26,10 +26,9 @@ enum SearchViewModelOutput {
 }
 
 enum SearchViewModelRoute {
-    case detail(viewModel: DetailViewModelProtocol)
+    case detail(article: Article)
 }
 
 protocol SearchViewDelegate: AnyObject {
     func handleOutputs(_ output: SearchViewModelOutput)
-    func navigate(to route: SearchViewModelRoute)
 }

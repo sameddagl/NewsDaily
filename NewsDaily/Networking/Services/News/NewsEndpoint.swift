@@ -8,10 +8,9 @@
 import Foundation
 
 enum NewsEndpoint: HTTPEndpoint {
-    //https://newsdata.io/api/1/news?apikey=pub_12891bbaa86f6767ce902a41954a6cdbd598d
-
     case fetchNews(category: NewsCategories, page: Int)
     case searchFor(q: String, page: Int)
+    
     var path: String {
         return Paths.latest
     }

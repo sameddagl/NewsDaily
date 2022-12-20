@@ -21,17 +21,17 @@ enum HomeViewModelOutput {
     case startLoading
     case endLoading
     case didUploadWithNews(news: [ArticlePresentation])
+    case changeCategory
     case emptyState(message: String)
     case removeEmptyState
     case didFailWithError(title: String, message: String)
 }
 
 enum HomeViewModelRoute {
-    case detail(viewModel: DetailViewModelProtocol)
+    case detail(article: Article)
     case sort
 }
 
 protocol HomeViewDelegate: AnyObject {
     func handleOutputs(_ output: HomeViewModelOutput)
-    func navigate(to route: HomeViewModelRoute)
 }

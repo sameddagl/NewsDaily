@@ -15,7 +15,7 @@ protocol DetailViewModelProtocol {
 
 enum DetaiViewModellOutput {
     case load(ArticlePresentation)
-    case showWebPage(url: String)
+    case showSafariView(url: String)
 }
 
 protocol DetailViewDelagate: AnyObject {

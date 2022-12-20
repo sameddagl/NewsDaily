@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     private var tableView: UITableView!
     
     var viewModel: SearchViewModelPorotocol!
@@ -21,7 +21,7 @@ class SearchViewController: UIViewController {
         configureView()
         createTableView()
         configureNavBar()
-        showEmptyStateView(with: "Please enter some text to search for articles", in: self.view)
+        showEmptyStateView(with: "no_text".localized(), in: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +33,7 @@ class SearchViewController: UIViewController {
     }
 }
 
+//MARK: - View Model Outputs
 extension SearchViewController: SearchViewDelegate {
     func handleOutputs(_ output: SearchViewModelOutput) {
         switch output {
@@ -40,14 +41,10 @@ extension SearchViewController: SearchViewDelegate {
             showLoadingScreen()
         case .endLoading:
             dismissLoadingScreen()
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.endRefreshing()
-            }
+            tableView.endRefreshOnMainThread()
         case .didUploadWithNews(let news):
             self.articles = news
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            tableView.reloadOnMainThread()
         case .showEmptyStateView(let message):
             DispatchQueue.main.async {
                 self.showEmptyStateView(with: message, in: self.view)
@@ -58,16 +55,10 @@ extension SearchViewController: SearchViewDelegate {
             print(title, message)
         }
     }
-    
-    func navigate(to route: SearchViewModelRoute) {
-        switch route {
-        case .detail(let viewModel):
-            let vc = DetailBuilder.make(viewModel: viewModel)
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
+
 }
 
+//MARK: - Table View Delegates
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
@@ -99,6 +90,7 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - Search Bar Delegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer?.invalidate()
@@ -107,7 +99,7 @@ extension SearchViewController: UISearchBarDelegate {
         guard let query = searchBar.text?.lowercased(), !query.isEmpty else {
             articles.removeAll()
             tableView.reloadData()
-            showEmptyStateView(with: "Please enter some text to search for articles", in: self.view)
+            showEmptyStateView(with: "no_text".localized(), in: self.view)
             return
         }
         
@@ -119,7 +111,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         articles.removeAll()
         tableView.reloadData()
-        showEmptyStateView(with: "Please enter some text to search for articles", in: self.view)
+        showEmptyStateView(with: "no_text".localized(), in: self.view)
     }
 }
 
@@ -133,7 +125,7 @@ extension SearchViewController {
     private func configureNavBar() {
         let searchController = UISearchController()
         searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = "Search for an article"
+        searchController.searchBar.placeholder = "place_holder".localized()
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
     }

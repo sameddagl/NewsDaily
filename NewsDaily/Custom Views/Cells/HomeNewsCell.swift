@@ -64,8 +64,6 @@ final class HomeNewsCell: UITableViewCell {
             make.trailing.equalTo(self).offset(-padding)
             make.bottom.lessThanOrEqualTo(sourceTitleLabel.snp.top).offset(-padding)
         }
-        
-
     }
     
     required init?(coder: NSCoder) {

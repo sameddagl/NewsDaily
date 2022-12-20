@@ -7,17 +7,20 @@
 
 import UIKit
 
-protocol SortViewDelegate {
+protocol SortViewDelegate: AnyObject {
     func didSelectCategory(category: NewsCategories)
 }
 
 class SortViewController: UIViewController {
+    //MARK: - UI Properties
     private var tableView: UITableView!
     private var containerView: UIView!
-    private let doneButton = NDActionButton(title: "Done", backgroundColor: .clear)
+    private let doneButton = NDActionButton(title: "done".localized(), backgroundColor: .clear)
     
-    var delegate: SortViewDelegate!
-    private var sorts = ["Top", "World", "Business", "Technology", "Entartainment", "Sports", "Environment", "Food", "Health", "Politics", "Science"]
+    //MARK: - Properties
+    weak var delegate: SortViewDelegate!
+    
+    private var sorts = SortOption.sorts
     private var categories: [NewsCategories] = [.top, .world, .business, .technology, .entertainment, .sports, .environment, .food, .health, .politics, .science]
     
     override func viewDidLoad() {
@@ -25,6 +28,14 @@ class SortViewController: UIViewController {
         configureView()
         configureContainerView()
         createTableView()
+        
+        if let selectedCategory = UserDefaults.standard.object(forKey: "selectedCategory") as? Int {
+            sorts[selectedCategory].isSelected = true
+            tableView.scrollToRow(at: IndexPath(row: selectedCategory, section: 0), at: .top, animated: true)
+        }
+        else {
+            sorts[0].isSelected = true
+        }
     }
     
     @objc private func doneTapped() {
@@ -32,6 +43,7 @@ class SortViewController: UIViewController {
     }
 }
 
+//MARK: - Table View Delegates
 extension SortViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sorts.count
@@ -39,22 +51,32 @@ extension SortViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = sorts[indexPath.row]
-        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.text = sorts[indexPath.row].title
+        cell.accessoryType = sorts[indexPath.row].isSelected ? .checkmark : .none
         return cell
     }
 }
 
 extension SortViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 70
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate.didSelectCategory(category: categories[indexPath.row])
+        
+        for (index, _) in sorts.enumerated() {
+            sorts[index].isSelected = false
+        }
+        
+        sorts[indexPath.row].isSelected.toggle()
+        UserDefaults.standard.setValue(indexPath.row, forKey: "selectedCategory")
+        
+        tableView.reloadData()
         dismiss(animated: true)
     }
 }
+
 //MARK: - UI Related
 extension SortViewController {
     private func configureView() {
@@ -90,7 +112,6 @@ extension SortViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorColor = .clear
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         containerView.addSubview(tableView)
         

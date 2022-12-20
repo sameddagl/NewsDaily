@@ -14,12 +14,7 @@ final class HomeViewController: UIViewController {
     private var emptyStateView: UIView!
     
     //MARK: - Injections
-    private var viewModel: HomeViewModelProtocol!
-    
-    init(viewModel: HomeViewModelProtocol!) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
-    }
+    var viewModel: HomeViewModelProtocol!
     
     //MARK: - Properties
     private var dataSource: UITableViewDiffableDataSource<Int, ArticlePresentation>!
@@ -30,7 +25,6 @@ final class HomeViewController: UIViewController {
         configureView()
         createTableView()
         configureDataSource()
-        viewModel.delegate = self
         viewModel.load()
     }
     
@@ -47,11 +41,6 @@ final class HomeViewController: UIViewController {
     @objc private func didPullToRefresh() {
         viewModel.didPullToRefresh()
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
 
 //MARK: - View Model Outputs
@@ -62,13 +51,15 @@ extension HomeViewController: HomeViewDelegate {
             showLoadingScreen()
         case .endLoading:
             dismissLoadingScreen()
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.endRefreshing()
-            }
+            self.tableView.endRefreshOnMainThread()
         case .didUploadWithNews(let news):
             SDImageCache.shared.clearMemory()
             self.news = news
             self.updateNews()
+        case .changeCategory:
+            if !news.isEmpty {
+                tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
         case .emptyState(let message):
             DispatchQueue.main.async {
                 self.showEmptyStateView(with: message, in: self.view)
@@ -78,28 +69,6 @@ extension HomeViewController: HomeViewDelegate {
         case .didFailWithError(let title, let message):
             print(title, message)
         }
-    }
-    
-    func navigate(to route: HomeViewModelRoute) {
-        switch route {
-        case .detail(let viewModel):
-            let vc = DetailBuilder.make(viewModel: viewModel)
-            navigationController?.pushViewController(vc, animated: true)
-        case .sort:
-            let vc = SortViewController()
-            vc.delegate = self
-            vc.modalTransitionStyle = .crossDissolve
-            present(vc, animated: true)
-        }
-    }
-}
-
-extension HomeViewController: SortViewDelegate {
-    func didSelectCategory(category: NewsCategories) {
-        if !news.isEmpty {
-            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        }
-        viewModel.changeCategory(category: category)
     }
 }
 
@@ -125,7 +94,6 @@ extension HomeViewController: UITableViewDelegate {
 //MARK: - UI Related
 extension HomeViewController {
     private func configureView() {
-        
         let rightButton = UIBarButtonItem(image: SFSymbols.sort, style: .done, target: self, action: #selector(sortTapped))
         navigationItem.rightBarButtonItem = rightButton
         

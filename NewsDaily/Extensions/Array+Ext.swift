@@ -13,11 +13,7 @@ extension Array where Element:Equatable {
 
         for value in self {
             if !result.contains(value){
-                print("added ")
                 result.append(value)
-            }
-            else {
-                print("duplicate")
             }
         }
 

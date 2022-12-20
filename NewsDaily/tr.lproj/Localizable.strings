@@ -10,3 +10,26 @@
 "search_title" = "Arama";
 "favorites_title" = "Favoriler";
 "more_button" = "Daha fazla";
+
+//Search Field
+"place_holder" = "";
+
+//Empty States
+"no_news" = "Seçtiğiniz kategori için haber bulunamadı.";
+"no_text" = "Haber aramak için bir kelime girin";
+
+//Buttons
+"done" = "Tamam";
+
+//Categories
+"top" = "Popüler";
+"world" = "Dünya";
+"business" = "İş Dünyası";
+"technology" = "Teknoloji";
+"entartainment" = "Eğlence";
+"sports" = "Spor";
+"environment" = "Çevre";
+"food" = "Yemek";
+"health" = "Sağlık";
+"politics" = "Politika";
+"science" = "Bilim";
