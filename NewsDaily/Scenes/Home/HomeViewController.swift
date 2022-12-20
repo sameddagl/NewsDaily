@@ -51,9 +51,7 @@ extension HomeViewController: HomeViewDelegate {
             showLoadingScreen()
         case .endLoading:
             dismissLoadingScreen()
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.endRefreshing()
-            }
+            self.tableView.endRefreshOnMainThread()
         case .didUploadWithNews(let news):
             SDImageCache.shared.clearMemory()
             self.news = news
@@ -96,7 +94,6 @@ extension HomeViewController: UITableViewDelegate {
 //MARK: - UI Related
 extension HomeViewController {
     private func configureView() {
-        
         let rightButton = UIBarButtonItem(image: SFSymbols.sort, style: .done, target: self, action: #selector(sortTapped))
         navigationItem.rightBarButtonItem = rightButton
         

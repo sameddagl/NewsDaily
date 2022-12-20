@@ -10,3 +10,26 @@
 "search_title" = "Search";
 "favorites_title" = "Favorites";
 "more_button" = "Read more";
+
+//Search Field
+"place_holder" = "Search for an article";
+
+//Empty States
+"no_news" = "No news for the selected category";
+"no_text" = "Please enter some text to search for articles";
+
+//Buttons
+"done" = "Done";
+
+//Categories
+"top" = "Top";
+"world" = "World";
+"business" = "Business";
+"technology" = "Technology";
+"entartainment" = "Entartainment";
+"sports" = "Sports";
+"environment" = "Environment";
+"food" = "Food";
+"health" = "Health";
+"politics" = "Politics";
+"science" = "Science";

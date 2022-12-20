@@ -9,6 +9,8 @@ import Foundation
 
 final class HomeViewModel: HomeViewModelProtocol {
     weak var delegate: HomeViewDelegate?
+    
+    //MARK: - Injections
     private var newsService: NewsServiceProtocol
     private weak var coordinator: HomeCoordinator?
     
@@ -17,12 +19,14 @@ final class HomeViewModel: HomeViewModelProtocol {
         self.coordinator = coordinator
     }
     
+    //MARK: - Properties
     private var news = [Article]()
     private var hasMoreNews = true
     private var selectedCategory: NewsCategories = .top
     
     private var currentPage = 1
     
+    //MARK: - Main Functions
     func load() {
         notify(.startLoading)
         newsService.fetchNews(endPoint: .fetchNews(category: selectedCategory, page: currentPage)) { [weak self] result in
@@ -50,7 +54,7 @@ final class HomeViewModel: HomeViewModelProtocol {
         self.notify(.didUploadWithNews(news: news))
         
         if self.news.isEmpty {
-            notify(.emptyState(message: "No news for the \(selectedCategory.rawValue.capitalized) category"))
+            notify(.emptyState(message: "no_news".localized()))
             return
         }
         else {
@@ -91,6 +95,7 @@ final class HomeViewModel: HomeViewModelProtocol {
         navigate(to: .detail(article: selectedArticle))
     }
     
+    //MARK: - Helper Functions
     private func navigate(to route: HomeViewModelRoute) {
         switch route {
         case .detail(let article):
@@ -105,6 +110,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     } 
 }
 
+//MARK: - Sort View Delegate
 extension HomeViewModel: SortViewDelegate {
     func didSelectCategory(category: NewsCategories) {
         changeCategory(category: category)

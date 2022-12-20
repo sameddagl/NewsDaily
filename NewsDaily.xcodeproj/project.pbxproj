@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C001C332951EB3000C875A7 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C001C322951EB3000C875A7 /* UITableView+Ext.swift */; };
 		2C068171293F2BEF0085F1D3 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C068170293F2BEF0085F1D3 /* UIViewController+Ext.swift */; };
 		2C115ABD29506570008B1FA6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2C115ABC29506570008B1FA6 /* SnapKit */; };
 		2C115AC329506656008B1FA6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C115AC229506656008B1FA6 /* SDWebImage */; };
@@ -45,6 +46,7 @@
 		2C69D0E7293F5C8D00DFB6B3 /* DetailPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E6293F5C8D00DFB6B3 /* DetailPresentation.swift */; };
 		2C69D0EA293F752000DFB6B3 /* NDActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */; };
 		2C69D0ED293F84A500DFB6B3 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0EC293F84A500DFB6B3 /* SortViewController.swift */; };
+		2C7F6592295202F3004B7934 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F6591295202F3004B7934 /* SortOption.swift */; };
 		2C7F89B7295067800044FF88 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F89B6295067800044FF88 /* Coordinator.swift */; };
 		2C7F89B9295067870044FF88 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F89B8295067870044FF88 /* HomeCoordinator.swift */; };
 		2C7F89BB2950678C0044FF88 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F89BA2950678C0044FF88 /* SearchCoordinator.swift */; };
@@ -56,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C001C322951EB3000C875A7 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		2C068170293F2BEF0085F1D3 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		2C16FE29293E647100FF5BA4 /* NewsDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C16FE2C293E647100FF5BA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		2C69D0E6293F5C8D00DFB6B3 /* DetailPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresentation.swift; sourceTree = "<group>"; };
 		2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDActionButton.swift; sourceTree = "<group>"; };
 		2C69D0EC293F84A500DFB6B3 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
+		2C7F6591295202F3004B7934 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
 		2C7F89B6295067800044FF88 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		2C7F89B8295067870044FF88 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		2C7F89BA2950678C0044FF88 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 				2C16FE65293E756300FF5BA4 /* String+Ext.swift */,
 				2C068170293F2BEF0085F1D3 /* UIViewController+Ext.swift */,
 				2C8A4D972949AFC6001574FE /* Array+Ext.swift */,
+				2C001C322951EB3000C875A7 /* UITableView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				2C69D0EC293F84A500DFB6B3 /* SortViewController.swift */,
+				2C7F6591295202F3004B7934 /* SortOption.swift */,
 			);
 			path = "Sort Page";
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				2C16FE6B293E769600FF5BA4 /* Service.swift in Sources */,
 				2C16FE2D293E647100FF5BA4 /* AppDelegate.swift in Sources */,
 				2C7F89B9295067870044FF88 /* HomeCoordinator.swift in Sources */,
+				2C7F6592295202F3004B7934 /* SortOption.swift in Sources */,
 				2C16FE5E293E729800FF5BA4 /* HTTPEndpoint.swift in Sources */,
 				2C16FE7B293E89A800FF5BA4 /* NewsService.swift in Sources */,
 				2C16FE59293E677B00FF5BA4 /* FavoritesViewController.swift in Sources */,
@@ -505,6 +512,7 @@
 				2C16FE8B293E8FC600FF5BA4 /* ArticlePresentation.swift in Sources */,
 				2C69D0EA293F752000DFB6B3 /* NDActionButton.swift in Sources */,
 				2C16FE7D293E8A0700FF5BA4 /* News.swift in Sources */,
+				2C001C332951EB3000C875A7 /* UITableView+Ext.swift in Sources */,
 				2C16FE66293E756300FF5BA4 /* String+Ext.swift in Sources */,
 				2C16FE96293E984E00FF5BA4 /* NDBodyLabel.swift in Sources */,
 			);

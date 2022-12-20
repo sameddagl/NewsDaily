@@ -10,6 +10,7 @@ import Foundation
 final class SearchViewModel: SearchViewModelPorotocol {
     weak var delegate: SearchViewDelegate?
     
+    //MARK: - Injections
     private var newsService: NewsServiceProtocol
     private weak var coordinator: SearchCoordinator?
     
@@ -18,12 +19,14 @@ final class SearchViewModel: SearchViewModelPorotocol {
         self.coordinator = coordinator
     }
     
+    //MARK: - Properties
     private var articles = [Article]()
     
     private var query = ""
     private var currentPage = 1
     private var hasMoreNews = true
-    
+
+    //MARK: - Main Functions
     func search(with q: String) {
         query = q
         notify(.startLoading)
@@ -87,6 +90,7 @@ final class SearchViewModel: SearchViewModelPorotocol {
         navigate(to: .detail(article: selectedArticle))
     }
     
+    //MARK: - Helper Functions
     private func navigate(to root: SearchViewModelRoute) {
         switch root {
         case .detail(let article):
@@ -97,6 +101,4 @@ final class SearchViewModel: SearchViewModelPorotocol {
     private func notify(_ output: SearchViewModelOutput) {
         delegate?.handleOutputs(output)
     }
-    
-    
 }
