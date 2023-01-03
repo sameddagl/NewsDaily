@@ -11,7 +11,6 @@ import SDWebImage
 final class HomeViewController: UIViewController {
     //MARK: - UI Elements
     private var tableView: UITableView!
-    private var emptyStateView: UIView!
     
     //MARK: - Injections
     var viewModel: HomeViewModelProtocol!
@@ -22,9 +21,7 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
-        createTableView()
-        configureDataSource()
+        layout()
         viewModel.load()
     }
     
@@ -93,6 +90,12 @@ extension HomeViewController: UITableViewDelegate {
 
 //MARK: - UI Related
 extension HomeViewController {
+    private func layout() {
+        configureView()
+        createTableView()
+        configureDataSource()
+    }
+    
     private func configureView() {
         let rightButton = UIBarButtonItem(image: SFSymbols.sort, style: .done, target: self, action: #selector(sortTapped))
         navigationItem.rightBarButtonItem = rightButton

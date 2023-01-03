@@ -12,7 +12,6 @@ protocol ServiceProtocol {
 }
 
 final class Service: ServiceProtocol {
-    private var cache = NSCache<NSString, UIImage>()
     
     func fetch<T: Decodable>(endPoint: HTTPEndpoint, completion: @escaping (Result<T, NetworkError>) -> Void) {
         var components = URLComponents()

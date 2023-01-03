@@ -18,7 +18,7 @@ final class SearchCoordinator: Coordinator {
     
     func start() {
         let vc = SearchViewController()
-        let viewModel = SearchViewModel(newsService: appContainer.newsService, coordinator: self)
+        let viewModel = SearchViewModel(newsService: ServiceContainer.newsService, coordinator: self)
         
         viewModel.delegate = vc
         vc.viewModel = viewModel
@@ -28,7 +28,7 @@ final class SearchCoordinator: Coordinator {
     
     func goToDetail(article: Article) {
         let vc = DetailViewController()
-        let viewModel = DetailViewModel(article: article)
+        let viewModel = DetailViewModel(article: article, coreDataManager: AppContainer.coreDataManager)
         
         viewModel.delegate = vc
         vc.viewModel = viewModel

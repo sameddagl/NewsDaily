@@ -10,11 +10,11 @@ import Foundation
 protocol HomeViewModelProtocol {
     var delegate: HomeViewDelegate? { get set }
     func load()
+    func selectItem(at index: Int)
     func changeCategory(category: NewsCategories)
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat)
     func didPullToRefresh()
     func didSelectToSort()
-    func selectItem(at index: Int)
 }
 
 enum HomeViewModelOutput {

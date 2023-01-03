@@ -25,10 +25,15 @@ class SortViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
-        configureContainerView()
-        createTableView()
-        
+        layout()
+        scrollToSelectedCategory()
+    }
+    
+    @objc private func doneTapped() {
+        dismiss(animated: true)
+    }
+    
+    private func scrollToSelectedCategory() {
         if let selectedCategory = UserDefaults.standard.object(forKey: "selectedCategory") as? Int {
             sorts[selectedCategory].isSelected = true
             tableView.scrollToRow(at: IndexPath(row: selectedCategory, section: 0), at: .top, animated: true)
@@ -36,10 +41,6 @@ class SortViewController: UIViewController {
         else {
             sorts[0].isSelected = true
         }
-    }
-    
-    @objc private func doneTapped() {
-        dismiss(animated: true)
     }
 }
 
@@ -79,6 +80,12 @@ extension SortViewController: UITableViewDelegate {
 
 //MARK: - UI Related
 extension SortViewController {
+    private func layout() {
+        configureView()
+        configureContainerView()
+        createTableView()
+    }
+    
     private func configureView() {
         view.backgroundColor = .clear
     }

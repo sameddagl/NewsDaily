@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
     private let descriptionLabel = NDBodyLabel(alignment: .left)
     private let sourceNameLabel = NDSecondaryLabel(alignment: .right)
     private var actionButton = NDActionButton(title: "more_button".localized(with: ""), backgroundColor: .systemGray6)
+    private let saveButton = UIButton()
     
     //MARK: - Injections
     var viewModel: DetailViewModelProtocol!
@@ -38,13 +39,19 @@ class DetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
+    @objc func saveTapped() {
+        viewModel.saveTapped()
+        
+        saveButton.isSelected.toggle()
+    }
+    
     @objc func readMoreTapped() {
         viewModel.requestWebPage()
     }
 }
 
 extension DetailViewController: DetailViewDelagate {
-    func handleOutput(_ output: DetaiViewModellOutput) {
+    func handleOutput(_ output: DetaiViewModelOutput) {
         switch output {
         case .load(let articlePresentation):
             if let imageURL = articlePresentation.urlToImage {
@@ -56,6 +63,8 @@ extension DetailViewController: DetailViewDelagate {
             titleLabel.text = articlePresentation.title
             sourceNameLabel.text = articlePresentation.sourceName
             descriptionLabel.text = articlePresentation.articleDescription
+        case .isSaved(let isSaved):
+            saveButton.isSelected = isSaved
         case .showSafariView(let url):
             showSafariView(with: url)
         }
@@ -67,6 +76,16 @@ extension DetailViewController {
     
     func configureView() {
         view.backgroundColor = .systemBackground
+        
+        saveButton.setImage(SFSymbols.favorites, for: .normal)
+        saveButton.setImage(SFSymbols.favoritesFill, for: .selected)
+        saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        
+        saveButton.imageView?.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.2)
+                
+        let saveBarButton = UIBarButtonItem(customView: saveButton)
+        
+        navigationItem.rightBarButtonItem = saveBarButton
     }
     
     func setupScrollView() {

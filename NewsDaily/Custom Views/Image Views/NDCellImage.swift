@@ -14,10 +14,6 @@ final class NDCellImage: UIImageView {
         configure()
     }
     
-    convenience init() {
-        self.init(frame: .zero)
-    }
-    
     private func configure() {
         clipsToBounds = true
         layer.cornerRadius = 20
