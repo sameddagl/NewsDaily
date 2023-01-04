@@ -10,7 +10,10 @@ import UIKit
 class FavoritesViewController: UIViewController {
     private var collectionView: UICollectionView!
     
-    private var savedArticles = [NewsModel]()
+    var viewModel: FavoritesViewModelProtocol!
+    
+    private var savedArticles = [ArticlePresentation]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
@@ -18,9 +21,23 @@ class FavoritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function)
-        savedArticles = AppContainer.coreDataManager.fetchSavedNews()
+        viewModel.load()
         collectionView.reloadData()
+    }
+}
+
+extension FavoritesViewController: FavoritesViewModelDelegate {
+    func handleOutput(_ output: FavoritesOutput) {
+        switch output {
+        case .didUploadWithNews(let news):
+            self.savedArticles = news
+        case .emptyState(let message):
+            showEmptyStateView(with: message, in: self.view)
+        case .removeEmptyState:
+            removeEmptyStateView()
+        case .didFailWithError(let title, let message):
+            print(title, message)
+        }
     }
 }
 
@@ -32,8 +49,14 @@ extension FavoritesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.reuseID, for: indexPath) as! FavoriteCell
         let article = savedArticles[indexPath.item]
-        cell.set(article: ArticlePresentation(article: article))
+        cell.set(article: article)
         return cell
+    }
+}
+
+extension FavoritesViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.selectItem(at: indexPath.item)
     }
 }
 
@@ -47,11 +70,13 @@ extension FavoritesViewController {
     private func configureView() {
         view.backgroundColor = .systemBackground
         navigationItem.title = "favorites_title".localized(with: "")
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: create2ColumnLayout())
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.reuseID)
         view.addSubview(collectionView)
     }

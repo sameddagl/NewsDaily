@@ -11,7 +11,7 @@ import CoreData
 protocol CoreDataManagerProtocol {
     func save(article: Article)
     func fetchSavedNews() -> [NewsModel]
-    func deleteSavedArticle()
+    func delete(article: Article)
 }
 
 final class CoreDataManager: CoreDataManagerProtocol {
@@ -44,7 +44,22 @@ final class CoreDataManager: CoreDataManagerProtocol {
         }
     }
     
-    func deleteSavedArticle() {
+    func delete(article: Article) {
+        let savedArticles = fetchSavedNews()
+        var articleToDelete: NewsModel!
         
+        for savedArticle in savedArticles {
+            if savedArticle.title == article.title {
+                articleToDelete = savedArticle
+            }
+        }
+        
+        context.delete(articleToDelete)
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }

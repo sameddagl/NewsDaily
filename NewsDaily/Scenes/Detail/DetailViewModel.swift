@@ -25,11 +25,13 @@ final class DetailViewModel: DetailViewModelProtocol {
         notify(.isSaved(checkIfSaved()))
     }
     
-    func saveTapped() {
-        if checkIfSaved() {
-            //Delete
+    func saveTapped(isSelected: Bool) {
+        if isSelected {
+            print("delete")
+            coreDataManager.delete(article: article)
         }
         else {
+            print("save")
             coreDataManager.save(article: article)
         }
     }

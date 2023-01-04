@@ -10,7 +10,7 @@ import Foundation
 protocol DetailViewModelProtocol {
     var delegate: DetailViewDelagate? { get set }
     func load()
-    func saveTapped()
+    func saveTapped(isSelected: Bool)
     func requestWebPage()
 }
 

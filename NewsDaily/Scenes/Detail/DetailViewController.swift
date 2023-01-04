@@ -40,8 +40,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func saveTapped() {
-        viewModel.saveTapped()
-        
+        viewModel.saveTapped(isSelected: saveButton.isSelected)
         saveButton.isSelected.toggle()
     }
     

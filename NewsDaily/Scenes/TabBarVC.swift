@@ -11,6 +11,7 @@ final class TabBarVC: UITabBarController {
     
     let homeCoordinator = HomeCoordinator(navigationController: UINavigationController())
     let searchCoordinator = SearchCoordinator(navigationController: UINavigationController())
+    let favoritesCoordinator = FavoritesCoordinator(navigationController: UINavigationController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +24,12 @@ final class TabBarVC: UITabBarController {
         let searchScreen = searchCoordinator.navigationController
         searchScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.search, selectedImage: nil)
         
-        let favoritesScreen = UINavigationController(rootViewController: FavoritesViewController())
+        let favoritesScreen = favoritesCoordinator.navigationController
         favoritesScreen.tabBarItem = UITabBarItem(title: "", image: SFSymbols.favorites, selectedImage: SFSymbols.favoritesFill)
         
         homeCoordinator.start()
         searchCoordinator.start()
+        favoritesCoordinator.start()
         setViewControllers([homeScreen, searchScreen, favoritesScreen], animated: true)
     }
 }
