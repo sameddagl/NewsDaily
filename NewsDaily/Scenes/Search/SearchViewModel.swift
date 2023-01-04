@@ -28,6 +28,7 @@ final class SearchViewModel: SearchViewModelPorotocol {
 
     //MARK: - Main Functions
     func search(with q: String) {
+        print(#function)
         query = q
         notify(.startLoading)
         newsService.searchFor(endPoint: .searchFor(q: query, page: currentPage)) { [weak self] result in
@@ -71,9 +72,13 @@ final class SearchViewModel: SearchViewModelPorotocol {
     }
     
     func didPullToRefresh() {
-        articles.removeAll()
-        currentPage = 1
-        search(with: query)
+        print(articles.count)
+        print(articles.isEmpty)
+        if !articles.isEmpty {
+            articles.removeAll()
+            currentPage = 1
+            search(with: query)
+        }
     }
     
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat) {

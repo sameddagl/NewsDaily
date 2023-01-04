@@ -1,13 +1,13 @@
 //
-//  SearchCoordinator.swift
+//  FavoritesCoordinator.swift
 //  NewsDaily
 //
-//  Created by Samed Dağlı on 19.12.2022.
+//  Created by Samed Dağlı on 4.01.2023.
 //
 
 import UIKit
 
-final class SearchCoordinator: Coordinator {
+final class FavoritesCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     
     var navigationController: UINavigationController
@@ -17,8 +17,8 @@ final class SearchCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = SearchViewController()
-        let viewModel = SearchViewModel(newsService: ServiceContainer.newsService, coordinator: self)
+        let vc = FavoritesViewController()
+        let viewModel = FavoritesViewModel(coreDataManager: AppContainer.coreDataManager, coordinator: self)
         
         viewModel.delegate = vc
         vc.viewModel = viewModel
@@ -35,5 +35,4 @@ final class SearchCoordinator: Coordinator {
         
         navigationController.pushViewController(vc, animated: true)
     }
-
 }

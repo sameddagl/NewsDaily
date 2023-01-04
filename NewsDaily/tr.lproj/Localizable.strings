@@ -16,7 +16,8 @@
 
 //Empty States
 "no_news" = "Seçtiğiniz kategori için haber bulunamadı.";
-"no_text" = "Haber aramak için bir kelime girin";
+"no_text" = "Haber aramak için bir kelime girin.";
+"no_saved_article" = "Kaydedilmiş bir haber bulunamadı.";
 
 //Buttons
 "done" = "Tamam";

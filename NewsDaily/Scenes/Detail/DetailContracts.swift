@@ -10,14 +10,16 @@ import Foundation
 protocol DetailViewModelProtocol {
     var delegate: DetailViewDelagate? { get set }
     func load()
+    func saveTapped(isSelected: Bool)
     func requestWebPage()
 }
 
-enum DetaiViewModellOutput {
+enum DetaiViewModelOutput {
     case load(ArticlePresentation)
+    case isSaved(Bool)
     case showSafariView(url: String)
 }
 
 protocol DetailViewDelagate: AnyObject {
-    func handleOutput(_ output: DetaiViewModellOutput)
+    func handleOutput(_ output: DetaiViewModelOutput)
 }

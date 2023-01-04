@@ -21,11 +21,11 @@ final class SearchViewController: UIViewController {
         configureView()
         createTableView()
         configureNavBar()
-        showEmptyStateView(with: "no_text".localized(), in: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         SDImageCache.shared.clearMemory()
+        showEmptyStateView(with: "no_text".localized(), in: self.tableView)
     }
     
     @objc private func didPullToRefresh() {
@@ -47,7 +47,7 @@ extension SearchViewController: SearchViewDelegate {
             tableView.reloadOnMainThread()
         case .showEmptyStateView(let message):
             DispatchQueue.main.async {
-                self.showEmptyStateView(with: message, in: self.view)
+                self.showEmptyStateView(with: message, in: self.tableView)
             }
         case .removeEmptyStateView:
             removeEmptyStateView()
@@ -99,7 +99,7 @@ extension SearchViewController: UISearchBarDelegate {
         guard let query = searchBar.text?.lowercased(), !query.isEmpty else {
             articles.removeAll()
             tableView.reloadData()
-            showEmptyStateView(with: "no_text".localized(), in: self.view)
+            showEmptyStateView(with: "no_text".localized(), in: self.tableView)
             return
         }
         
@@ -111,15 +111,16 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         articles.removeAll()
         tableView.reloadData()
-        showEmptyStateView(with: "no_text".localized(), in: self.view)
+        showEmptyStateView(with: "no_text".localized(), in: self.tableView)
     }
 }
 
 //MARK: - UI Related
 extension SearchViewController {
     private func configureView() {
-        navigationItem.title = "search_title".localized(with: "")
+        navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
+        navigationItem.title = "search_title".localized(with: "")
     }
     
     private func configureNavBar() {

@@ -7,9 +7,13 @@
 
 import Foundation
 
-let appContainer = AppContainer()
-
-final class AppContainer {
-    let service = Service()
-    let newsService = NewsService(service: Service())
+struct AppContainer {
+    static let service = Service()
+    static let coreDataManager = CoreDataManager()
 }
+
+struct ServiceContainer {
+    static let newsService = NewsService(service: Service())
+}
+
+

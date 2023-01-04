@@ -11,16 +11,19 @@ struct ArticlePresentation: Hashable {
     let title: String
     let articleDescription: String?
     let urlToImage: String?
-    let publishDate: String
     let sourceName: String
-    let content: String?
     
     init(article: Article) {
         self.title = article.title
         self.articleDescription = article.description
         self.urlToImage = article.image_url
-        self.publishDate = article.pubDate
         self.sourceName = article.source_id
-        self.content = ""
+    }
+    
+    init(article: NewsModel) {
+        self.title = article.title!
+        self.articleDescription = article.description
+        self.urlToImage = article.imageURL
+        self.sourceName = article.source_id!
     }
 }

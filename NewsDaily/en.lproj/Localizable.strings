@@ -15,8 +15,9 @@
 "place_holder" = "Search for an article";
 
 //Empty States
-"no_news" = "No news for the selected category";
-"no_text" = "Please enter some text to search for articles";
+"no_news" = "No news for the selected category.";
+"no_text" = "Please enter some text to search for articles.";
+"no_saved_article" = "No saved article found.";
 
 //Buttons
 "done" = "Done";

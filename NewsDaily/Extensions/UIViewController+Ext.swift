@@ -66,6 +66,7 @@ extension UIViewController {
     func removeEmptyStateView() {
         DispatchQueue.main.async {
             emptyStateView?.removeFromSuperview()
+            emptyStateView = nil
         }
     }
 }
