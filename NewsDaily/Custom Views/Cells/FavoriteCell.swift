@@ -19,6 +19,11 @@ final class FavoriteCell: UICollectionViewCell {
         configure()
     }
     
+    override func prepareForReuse() {
+        articleImageView.image = SFSymbols.placeholderImage
+        titleLabel.text = ""
+    }
+    
     func set(article: ArticlePresentation) {
         titleLabel.text = article.title
         

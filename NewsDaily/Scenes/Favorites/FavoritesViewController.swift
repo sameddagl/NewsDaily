@@ -14,8 +14,13 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
         savedArticles = AppContainer.coreDataManager.fetchSavedNews()
+        collectionView.reloadData()
     }
 }
 
@@ -26,7 +31,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.reuseID, for: indexPath) as! FavoriteCell
-        let article = savedArticles[indexPath.row]
+        let article = savedArticles[indexPath.item]
         cell.set(article: ArticlePresentation(article: article))
         return cell
     }
