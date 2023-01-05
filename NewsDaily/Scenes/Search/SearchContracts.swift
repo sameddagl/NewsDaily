@@ -11,7 +11,7 @@ protocol SearchViewModelPorotocol {
     var delegate: SearchViewDelegate? { get set }
     func search(with q: String)
     func newSearch()
-    func didPullToRefresh()
+    func checkEmptyState()
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat)
     func selectItem(at index: Int)
 }

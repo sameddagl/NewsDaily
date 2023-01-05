@@ -56,36 +56,37 @@ final class SearchViewModel: SearchViewModelPorotocol {
         self.articles = self.articles.removeDuplicates()
 
         let articlePresentation = self.articles.map { ArticlePresentation(article: $0) }
-        self.notify(.didUploadWithNews(news: articlePresentation))
+        notify(.didUploadWithNews(news: articlePresentation))
         
+        checkEmptyState(message: "No results found for \(query)")
+    }
+    
+    func newSearch() {
+        query = ""
+        articles.removeAll()
+        currentPage = 1
+    }
+    
+    func checkEmptyState() {
+        checkEmptyState(message: "no_text".localized())
+    }
+    
+    private func checkEmptyState(message: String) {
         if articles.isEmpty {
-            notify(.showEmptyStateView(message: "No results found for \(query)"))
+            notify(.showEmptyStateView(message: message))
         }
         else {
             notify(.removeEmptyStateView)
         }
     }
     
-    func newSearch() {
-        articles.removeAll()
-        currentPage = 1
-    }
-    
-    func didPullToRefresh() {
-        print(articles.count)
-        print(articles.isEmpty)
-        if !articles.isEmpty {
-            articles.removeAll()
-            currentPage = 1
-            search(with: query)
-        }
-    }
-    
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat) {
-        if height + offset - 50 >= contentHeight {
-            if hasMoreNews {
-                currentPage += 1
-                search(with: query)
+        if !articles.isEmpty {
+            if height + offset - 50 >= contentHeight {
+                if hasMoreNews {
+                    currentPage += 1
+                    search(with: query)
+                }
             }
         }
     }

@@ -29,12 +29,7 @@ final class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         SDImageCache.shared.clearMemory()
-        showEmptyStateView(with: "no_text".localized(), in: self.tableView)
-    }
-    
-    //MARK: - Actions
-    @objc private func didPullToRefresh() {
-        viewModel.didPullToRefresh()
+        viewModel.checkEmptyState()
     }
 }
 
@@ -99,12 +94,12 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         timer?.invalidate()
-        self.viewModel.newSearch()
+        viewModel.newSearch()
         
         guard let query = searchBar.text?.lowercased(), !query.isEmpty else {
             articles.removeAll()
             tableView.reloadData()
-            showEmptyStateView(with: "no_text".localized(), in: self.tableView)
+            viewModel.checkEmptyState()
             return
         }
         
@@ -116,7 +111,8 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         articles.removeAll()
         tableView.reloadData()
-        showEmptyStateView(with: "no_text".localized(), in: self.tableView)
+        viewModel.newSearch()
+        viewModel.checkEmptyState()
     }
 }
 
@@ -143,9 +139,5 @@ extension SearchViewController {
         tableView.keyboardDismissMode = .onDrag
         tableView.register(HomeNewsCell.self, forCellReuseIdentifier: HomeNewsCell.reuseID)
         view.addSubview(tableView)
-        
-        let refreshConrol = UIRefreshControl()
-        refreshConrol.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
-        tableView.refreshControl = refreshConrol
     }
 }

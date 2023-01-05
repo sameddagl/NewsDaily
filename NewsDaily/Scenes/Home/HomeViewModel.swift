@@ -99,9 +99,9 @@ final class HomeViewModel: HomeViewModelProtocol {
     private func navigate(to route: HomeRoute) {
         switch route {
         case .detail(let article):
-            coordinator?.goToDetail(article: article)
+            coordinator.goToDetail(article: article)
         case .sort:
-            coordinator?.goToSort(delegate: self)
+            coordinator.goToSort(delegate: self)
         }
     }
 
