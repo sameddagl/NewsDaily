@@ -18,6 +18,7 @@ enum DetaiViewModelOutput {
     case load(ArticlePresentation)
     case isSaved(Bool)
     case showSafariView(url: String)
+    case showCheckmarkView(message: String)
 }
 
 protocol DetailViewDelagate: AnyObject {

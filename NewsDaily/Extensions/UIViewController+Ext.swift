@@ -57,7 +57,7 @@ extension UIViewController {
             
             emptyStateView = NDEmptyStateView(message: message)
             guard let emptyStateView = emptyStateView else { return }
-
+            
             emptyStateView.frame = view.safeAreaLayoutGuide.layoutFrame
             view.addSubview(emptyStateView)
         }
@@ -67,6 +67,42 @@ extension UIViewController {
         DispatchQueue.main.async {
             emptyStateView?.removeFromSuperview()
             emptyStateView = nil
+        }
+    }
+    
+    func showCheckmarkView(with message: String, in view: UIView) {
+        DispatchQueue.main.async {
+            let checkmarkView = NDCheckmarkView(message: message)
+            
+            containerView = UIView(frame: self.view.bounds)
+            guard let containerView = containerView else { return }
+            containerView.addSubview(checkmarkView)
+            containerView.backgroundColor = .clear
+            
+            checkmarkView.snp.makeConstraints { make in
+                make.center.equalTo(containerView)
+            }
+            
+            self.view.addSubview(containerView)
+            
+            containerView.alpha = 0
+            
+            UIView.animate(withDuration: 0.5) {
+                containerView.alpha = 1
+            }
+            
+            self.dismissCheckmarkView()
+        }
+    }
+    
+    func dismissCheckmarkView() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            UIView.animate(withDuration: 0.5) {
+                containerView?.alpha = 0
+            } completion: { _ in
+                containerView?.removeFromSuperview()
+                containerView = nil
+            }
         }
     }
 }

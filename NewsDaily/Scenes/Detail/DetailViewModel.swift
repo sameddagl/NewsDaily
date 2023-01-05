@@ -29,15 +29,15 @@ final class DetailViewModel: DetailViewModelProtocol {
     
     func saveTapped(isSelected: Bool) {
         if isSelected {
-            print("delete")
             coreDataManager.delete(article: article)
+            notify(.showCheckmarkView(message: "Successfully unsaved"))
         }
         else {
-            print("save")
             coreDataManager.save(article: article)
+            notify(.showCheckmarkView(message: "Successfully saved"))
         }
     }
-    
+
     func requestWebPage() {
         notify(.showSafariView(url: article.link))
     }

@@ -67,6 +67,8 @@ extension DetailViewController: DetailViewDelagate {
             saveButton.isSelected = isSaved
         case .showSafariView(let url):
             showSafariView(with: url)
+        case .showCheckmarkView(let message):
+            showCheckmarkView(with: message, in: view)
         }
     }
 }
@@ -81,7 +83,7 @@ extension DetailViewController {
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
         saveButton.imageView?.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.2)
-                
+        
         let saveBarButton = UIBarButtonItem(customView: saveButton)
         
         navigationItem.rightBarButtonItem = saveBarButton
@@ -137,9 +139,9 @@ extension DetailViewController {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(padding)
             make.trailing.equalTo(containerView).offset(-padding)
         }
-
+        
         actionButton.addTarget(self, action: #selector(readMoreTapped), for: .touchUpInside)
-
+        
         containerView.addSubview(actionButton)
         actionButton.snp.makeConstraints { make in
             make.centerX.equalTo(containerView)
@@ -152,7 +154,5 @@ extension DetailViewController {
             make.bottom.equalTo(actionButton.snp.bottom).offset(100)
         }
     }
-    
-    
 }
 

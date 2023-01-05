@@ -16,4 +16,5 @@ enum SFSymbols {
     
     static let placeholderImage = UIImage(systemName: "photo")
     static let sort = UIImage(systemName: "text.aligncenter")
+    static let checkmark = UIImage(systemName: "checkmark.circle")
 }
