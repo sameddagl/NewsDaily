@@ -25,7 +25,6 @@ final class Service: ServiceProtocol {
             return
         }
         
-        #warning("Delete url")
         print(url)
                         
         var urlRequest = URLRequest(url: url)

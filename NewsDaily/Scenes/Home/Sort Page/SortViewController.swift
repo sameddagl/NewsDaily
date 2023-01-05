@@ -11,7 +11,7 @@ protocol SortViewDelegate: AnyObject {
     func didSelectCategory(category: NewsCategories)
 }
 
-class SortViewController: UIViewController {
+final class SortViewController: UIViewController {
     //MARK: - UI Properties
     private var tableView: UITableView!
     private var containerView: UIView!
@@ -23,12 +23,14 @@ class SortViewController: UIViewController {
     private var sorts = SortOption.sorts
     private var categories: [NewsCategories] = [.top, .world, .business, .technology, .entertainment, .sports, .environment, .food, .health, .politics, .science]
     
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         scrollToSelectedCategory()
     }
     
+    //MARK: - Actions
     @objc private func doneTapped() {
         dismiss(animated: true)
     }

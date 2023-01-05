@@ -7,7 +7,14 @@
 
 import UIKit
 
-final class SearchCoordinator: Coordinator {
+protocol SearchCoordinatorProtocol: Coordinator {
+    var childCoordinators: [Coordinator] { get set }
+    var navigationController: UINavigationController { get set }
+    func start()
+    func goToDetail(article: Article)
+}
+
+final class SearchCoordinator: SearchCoordinatorProtocol {
     var childCoordinators = [Coordinator]()
     
     var navigationController: UINavigationController

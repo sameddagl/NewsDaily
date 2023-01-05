@@ -13,7 +13,7 @@ struct AppContainer {
 }
 
 struct ServiceContainer {
-    static let newsService = NewsService(service: Service())
+    static let newsService = NewsService(service: AppContainer.service)
 }
 
 

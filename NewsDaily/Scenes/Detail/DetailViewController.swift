@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     //MARK: - UI Elements
     private let scrollView = UIScrollView()
     private let containerView = UIView()
@@ -22,8 +22,7 @@ class DetailViewController: UIViewController {
     //MARK: - Injections
     var viewModel: DetailViewModelProtocol!
     
-    //MARK: - Properties
-    
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         SDImageCache.shared.clearMemory()
@@ -39,6 +38,7 @@ class DetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
+    //MARK: - Actions
     @objc func saveTapped() {
         viewModel.saveTapped(isSelected: saveButton.isSelected)
         saveButton.isSelected.toggle()
@@ -49,6 +49,7 @@ class DetailViewController: UIViewController {
     }
 }
 
+//MARK: - View Model Outputs
 extension DetailViewController: DetailViewDelagate {
     func handleOutput(_ output: DetaiViewModelOutput) {
         switch output {
@@ -72,8 +73,7 @@ extension DetailViewController: DetailViewDelagate {
 
 //MARK: - UI Related
 extension DetailViewController {
-    
-    func configureView() {
+    private func configureView() {
         view.backgroundColor = .systemBackground
         
         saveButton.setImage(SFSymbols.favorites, for: .normal)
@@ -87,7 +87,7 @@ extension DetailViewController {
         navigationItem.rightBarButtonItem = saveBarButton
     }
     
-    func setupScrollView() {
+    private func setupScrollView() {
         scrollView.addSubview(containerView)
         view.addSubview(scrollView)
         
@@ -102,7 +102,7 @@ extension DetailViewController {
         }
     }
     
-    func layoutViews() {
+    private func layoutViews() {
         articleImageView.tintColor = .secondarySystemFill
         articleImageView.contentMode = .scaleAspectFit
         articleImageView.image = SFSymbols.placeholderImage

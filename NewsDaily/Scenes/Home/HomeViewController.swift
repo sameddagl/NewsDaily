@@ -19,6 +19,7 @@ final class HomeViewController: UIViewController {
     private var dataSource: UITableViewDiffableDataSource<Int, ArticlePresentation>!
     private var news = [ArticlePresentation]()
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
@@ -31,6 +32,7 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    //MARK: - Actions
     @objc private func sortTapped() {
         viewModel.didSelectToSort()
     }
@@ -42,7 +44,7 @@ final class HomeViewController: UIViewController {
 
 //MARK: - View Model Outputs
 extension HomeViewController: HomeViewDelegate {
-    func handleOutputs(_ output: HomeViewModelOutput) {
+    func handleOutputs(_ output: HomeOutput) {
         switch output {
         case .startLoading:
             showLoadingScreen()

@@ -9,13 +9,17 @@ import UIKit
 import SDWebImage
 
 final class SearchViewController: UIViewController {
+    //MARK: - UI Elements
     private var tableView: UITableView!
     
+    //MARK: - Injections
     var viewModel: SearchViewModelPorotocol!
     
+    //MARK: - Properties
     private var articles = [ArticlePresentation]()
     private var timer: Timer?
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -28,6 +32,7 @@ final class SearchViewController: UIViewController {
         showEmptyStateView(with: "no_text".localized(), in: self.tableView)
     }
     
+    //MARK: - Actions
     @objc private func didPullToRefresh() {
         viewModel.didPullToRefresh()
     }
@@ -35,7 +40,7 @@ final class SearchViewController: UIViewController {
 
 //MARK: - View Model Outputs
 extension SearchViewController: SearchViewDelegate {
-    func handleOutputs(_ output: SearchViewModelOutput) {
+    func handleOutputs(_ output: SearchOutputs) {
         switch output {
         case .startLoading:
             showLoadingScreen()

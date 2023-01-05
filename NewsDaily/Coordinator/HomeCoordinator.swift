@@ -7,7 +7,15 @@
 
 import UIKit
 
-final class HomeCoordinator: Coordinator {
+protocol HomeCoordinatorProtocol: Coordinator {
+    var childCoordinators: [Coordinator] { get set }
+    var navigationController: UINavigationController { get set }
+    func start()
+    func goToDetail(article: Article)
+    func goToSort(delegate: HomeViewModel)
+}
+
+final class HomeCoordinator: HomeCoordinatorProtocol {
     var childCoordinators = [Coordinator]()
     
     var navigationController: UINavigationController

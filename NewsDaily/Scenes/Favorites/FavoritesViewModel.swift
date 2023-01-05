@@ -8,18 +8,21 @@
 import Foundation
 
 final class FavoritesViewModel: FavoritesViewModelProtocol {
-    var delegate: FavoritesViewModelDelegate?
+    weak var delegate: FavoritesViewDelegate?
     
+    //MARK: - Injections
     private let coreDataManager: CoreDataManagerProtocol
-    private let coordinator: FavoritesCoordinator
+    private let coordinator: FavoritesCoordinatorProtocol
     
-    init(coreDataManager: CoreDataManagerProtocol, coordinator: FavoritesCoordinator) {
+    init(coreDataManager: CoreDataManagerProtocol, coordinator: FavoritesCoordinatorProtocol) {
         self.coreDataManager = coreDataManager
         self.coordinator = coordinator
     }
     
+    //MARK: - Properties
     private var savedArticles = [NewsModel]()
     
+    //MARK: - Main Functions
     func load() {
         savedArticles = coreDataManager.fetchSavedNews()
         if savedArticles.isEmpty {
@@ -42,6 +45,7 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
                                                 source_id: selectedArticle.source_id!))
     }
     
+    //MARK: - Helper Functions
     private func notify(_ output: FavoritesOutput) {
         delegate?.handleOutput(output)
     }

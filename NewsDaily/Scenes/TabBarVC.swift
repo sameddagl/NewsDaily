@@ -30,6 +30,7 @@ final class TabBarVC: UITabBarController {
         homeCoordinator.start()
         searchCoordinator.start()
         favoritesCoordinator.start()
+        
         setViewControllers([homeScreen, searchScreen, favoritesScreen], animated: true)
     }
 }

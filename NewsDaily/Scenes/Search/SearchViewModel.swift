@@ -12,9 +12,9 @@ final class SearchViewModel: SearchViewModelPorotocol {
     
     //MARK: - Injections
     private var newsService: NewsServiceProtocol
-    private weak var coordinator: SearchCoordinator?
+    private weak var coordinator: SearchCoordinatorProtocol?
     
-    init(newsService: NewsServiceProtocol, coordinator: SearchCoordinator) {
+    init(newsService: NewsServiceProtocol, coordinator: SearchCoordinatorProtocol) {
         self.newsService = newsService
         self.coordinator = coordinator
     }
@@ -96,14 +96,14 @@ final class SearchViewModel: SearchViewModelPorotocol {
     }
     
     //MARK: - Helper Functions
-    private func navigate(to root: SearchViewModelRoute) {
+    private func navigate(to root: SearchRoute) {
         switch root {
         case .detail(let article):
             coordinator?.goToDetail(article: article)
         }
     }
     
-    private func notify(_ output: SearchViewModelOutput) {
+    private func notify(_ output: SearchOutputs) {
         delegate?.handleOutputs(output)
     }
 }

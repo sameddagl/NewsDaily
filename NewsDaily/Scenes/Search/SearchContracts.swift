@@ -16,7 +16,7 @@ protocol SearchViewModelPorotocol {
     func selectItem(at index: Int)
 }
 
-enum SearchViewModelOutput {
+enum SearchOutputs {
     case startLoading
     case endLoading
     case didUploadWithNews(news: [ArticlePresentation])
@@ -25,10 +25,10 @@ enum SearchViewModelOutput {
     case didFailWithError(title: String, message: String)
 }
 
-enum SearchViewModelRoute {
+enum SearchRoute {
     case detail(article: Article)
 }
 
 protocol SearchViewDelegate: AnyObject {
-    func handleOutputs(_ output: SearchViewModelOutput)
+    func handleOutputs(_ output: SearchOutputs)
 }

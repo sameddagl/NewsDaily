@@ -7,7 +7,14 @@
 
 import UIKit
 
-final class FavoritesCoordinator: Coordinator {
+protocol FavoritesCoordinatorProtocol: Coordinator {
+    var childCoordinators: [Coordinator] { get set }
+    var navigationController: UINavigationController { get set }
+    func start()
+    func goToDetail(article: Article)
+}
+
+final class FavoritesCoordinator: FavoritesCoordinatorProtocol {
     var childCoordinators = [Coordinator]()
     
     var navigationController: UINavigationController

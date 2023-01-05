@@ -8,12 +8,16 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
+    //MARK: - UI Properties
     private var collectionView: UICollectionView!
     
+    //MARK: - Injections
     var viewModel: FavoritesViewModelProtocol!
     
+    //MARK: - Properties
     private var savedArticles = [ArticlePresentation]()
     
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
@@ -26,7 +30,8 @@ class FavoritesViewController: UIViewController {
     }
 }
 
-extension FavoritesViewController: FavoritesViewModelDelegate {
+//MARK: - View Model Outputs
+extension FavoritesViewController: FavoritesViewDelegate {
     func handleOutput(_ output: FavoritesOutput) {
         switch output {
         case .didUploadWithNews(let news):
@@ -41,6 +46,7 @@ extension FavoritesViewController: FavoritesViewModelDelegate {
     }
 }
 
+//MARK: - Collection View Delegates
 extension FavoritesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return savedArticles.count

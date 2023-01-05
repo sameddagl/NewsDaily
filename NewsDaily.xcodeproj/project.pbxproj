@@ -251,8 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				2C16FE88293E8FA100FF5BA4 /* HomeContracts.swift */,
-				2C16FE54293E676B00FF5BA4 /* HomeViewController.swift */,
 				2C16FE86293E8F9800FF5BA4 /* HomeViewModel.swift */,
+				2C16FE54293E676B00FF5BA4 /* HomeViewController.swift */,
 				2C16FE8A293E8FC600FF5BA4 /* ArticlePresentation.swift */,
 				2C69D0EB293F848400DFB6B3 /* Sort Page */,
 			);
@@ -263,8 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				2C69D0E2293F5C7B00DFB6B3 /* DetailContracts.swift */,
-				2C16FE56293E677400FF5BA4 /* DetailViewController.swift */,
 				2C69D0E4293F5C8400DFB6B3 /* DetailViewModel.swift */,
+				2C16FE56293E677400FF5BA4 /* DetailViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -291,8 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				2CC8F66929489F15000A1D9A /* SearchContracts.swift */,
-				2C16FE5B293E686500FF5BA4 /* SearchViewController.swift */,
 				2CC8F66B29489F1D000A1D9A /* SearchViewModel.swift */,
+				2C16FE5B293E686500FF5BA4 /* SearchViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FavoritesViewModelProtocol {
-    var delegate: FavoritesViewModelDelegate? { get set }
+    var delegate: FavoritesViewDelegate? { get set }
     func load()
     func selectItem(at index: Int)
 }
@@ -20,6 +20,6 @@ enum FavoritesOutput {
     case didFailWithError(title: String, message: String)
 }
 
-protocol FavoritesViewModelDelegate {
+protocol FavoritesViewDelegate: AnyObject {
     func handleOutput(_ output: FavoritesOutput)
 }

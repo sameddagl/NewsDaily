@@ -12,9 +12,9 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     //MARK: - Injections
     private var newsService: NewsServiceProtocol
-    private weak var coordinator: HomeCoordinator?
+    private var coordinator: HomeCoordinatorProtocol
     
-    init(newsService: NewsServiceProtocol, coordinator: HomeCoordinator) {
+    init(newsService: NewsServiceProtocol, coordinator: HomeCoordinatorProtocol) {
         self.newsService = newsService
         self.coordinator = coordinator
     }
@@ -96,7 +96,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     }
     
     //MARK: - Helper Functions
-    private func navigate(to route: HomeViewModelRoute) {
+    private func navigate(to route: HomeRoute) {
         switch route {
         case .detail(let article):
             coordinator?.goToDetail(article: article)
@@ -105,7 +105,7 @@ final class HomeViewModel: HomeViewModelProtocol {
         }
     }
 
-    private func notify(_ output: HomeViewModelOutput) {
+    private func notify(_ output: HomeOutput) {
         delegate?.handleOutputs(output)
     } 
 }

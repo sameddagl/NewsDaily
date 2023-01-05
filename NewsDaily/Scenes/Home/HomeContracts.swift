@@ -17,7 +17,7 @@ protocol HomeViewModelProtocol {
     func didSelectToSort()
 }
 
-enum HomeViewModelOutput {
+enum HomeOutput {
     case startLoading
     case endLoading
     case didUploadWithNews(news: [ArticlePresentation])
@@ -27,11 +27,11 @@ enum HomeViewModelOutput {
     case didFailWithError(title: String, message: String)
 }
 
-enum HomeViewModelRoute {
+enum HomeRoute {
     case detail(article: Article)
     case sort
 }
 
 protocol HomeViewDelegate: AnyObject {
-    func handleOutputs(_ output: HomeViewModelOutput)
+    func handleOutputs(_ output: HomeOutput)
 }

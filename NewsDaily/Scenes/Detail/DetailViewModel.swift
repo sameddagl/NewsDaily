@@ -10,6 +10,7 @@ import Foundation
 final class DetailViewModel: DetailViewModelProtocol {
     weak var delegate: DetailViewDelagate?
 
+    //MARK: - Injections
     private var article: Article
     private var coreDataManager: CoreDataManagerProtocol
     
@@ -18,6 +19,7 @@ final class DetailViewModel: DetailViewModelProtocol {
         self.coreDataManager = coreDataManager
     }
     
+    //MARK: - Main Functions
     func load() {
         let detailPresentation = ArticlePresentation(article: article)
         notify(.load(detailPresentation))
@@ -40,6 +42,7 @@ final class DetailViewModel: DetailViewModelProtocol {
         notify(.showSafariView(url: article.link))
     }
     
+    //MARK: - Helper Functions
     private func checkIfSaved() -> Bool {
         let savedArticles = coreDataManager.fetchSavedNews()
         
