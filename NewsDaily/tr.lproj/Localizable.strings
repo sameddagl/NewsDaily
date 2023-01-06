@@ -22,6 +22,12 @@
 //Buttons
 "done" = "Tamam";
 
+//Alerts
+"delete_all_title" = "Hepsini sil";
+"delete_all_message" = "Kaydedilmiş tüm haberleri silmek istediğinizden emin misiniz?";
+"yes" = "Evet";
+"cancel" = "İptal";
+
 //Categories
 "top" = "Popüler";
 "world" = "Dünya";

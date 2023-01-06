@@ -31,12 +31,16 @@ class FavoritesViewController: UIViewController {
     
     //MARK: - Actions
     @objc private func deleteAllTapped() {
-        let ac = UIAlertController(title: "Delete all", message: "Do you want to delete all saved articles?", preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "Yes", style: .destructive) { [weak self] _ in
+        viewModel.deleteAllTapped()
+    }
+    
+    private func showDeleteAllAlert() {
+        let ac = UIAlertController(title: "delete_all_title".localized(), message: "delete_all_message".localized(), preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "yes".localized(), style: .destructive) { [weak self] _ in
             self?.viewModel.deleteAll()
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "cancel".localized(), style: .cancel)
         
         ac.addAction(okayAction)
         ac.addAction(cancelAction)
@@ -52,10 +56,14 @@ extension FavoritesViewController: FavoritesViewDelegate {
         case .didUploadWithNews(let news):
             self.savedArticles = news
             collectionView.reloadData()
+        case .isDeleteAllEnabled(let isEnabled):
+            navigationItem.rightBarButtonItem?.isEnabled = isEnabled
         case .emptyState(let message):
             showEmptyStateView(with: message, in: self.view)
         case .removeEmptyState:
             removeEmptyStateView()
+        case .showAlert:
+            showDeleteAllAlert()
         case .didFailWithError(let title, let message):
             print(title, message)
         }
