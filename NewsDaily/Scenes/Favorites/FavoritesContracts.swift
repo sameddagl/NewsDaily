@@ -11,6 +11,7 @@ protocol FavoritesViewModelProtocol {
     var delegate: FavoritesViewDelegate? { get set }
     func load()
     func selectItem(at index: Int)
+    func deleteAll()
 }
 
 enum FavoritesOutput {

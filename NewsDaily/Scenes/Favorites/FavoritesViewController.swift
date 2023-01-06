@@ -28,6 +28,21 @@ class FavoritesViewController: UIViewController {
         viewModel.load()
         collectionView.reloadData()
     }
+    
+    //MARK: - Actions
+    @objc private func deleteAllTapped() {
+        let ac = UIAlertController(title: "Delete all", message: "Do you want to delete all saved articles?", preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "Yes", style: .destructive) { [weak self] _ in
+            self?.viewModel.deleteAll()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        ac.addAction(okayAction)
+        ac.addAction(cancelAction)
+        
+        present(ac, animated: true)
+    }
 }
 
 //MARK: - View Model Outputs
@@ -36,6 +51,7 @@ extension FavoritesViewController: FavoritesViewDelegate {
         switch output {
         case .didUploadWithNews(let news):
             self.savedArticles = news
+            collectionView.reloadData()
         case .emptyState(let message):
             showEmptyStateView(with: message, in: self.view)
         case .removeEmptyState:
@@ -77,6 +93,9 @@ extension FavoritesViewController {
         view.backgroundColor = .systemBackground
         navigationItem.title = "favorites_title".localized(with: "")
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteAllTapped))
+        navigationItem.rightBarButtonItem = trashButton
     }
     
     private func configureCollectionView() {

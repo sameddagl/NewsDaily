@@ -26,8 +26,8 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
     func load() {
         savedArticles = coreDataManager.fetchSavedNews()
         if savedArticles.isEmpty {
-            notify(.emptyState(message: "no_saved_article".localized()))
             notify(.didUploadWithNews(news: []))
+            notify(.emptyState(message: "no_saved_article".localized()))
             return
         }
         
@@ -43,6 +43,11 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
                                                 description: selectedArticle.descript,
                                                 image_url: selectedArticle.imageURL,
                                                 source_id: selectedArticle.source_id!))
+    }
+    
+    func deleteAll() {
+        coreDataManager.deleteAll()
+        load()
     }
     
     //MARK: - Helper Functions
