@@ -24,12 +24,12 @@ final class HomeViewModel: HomeViewModelProtocol {
     private var hasMoreNews = true
     private var selectedCategory: NewsCategories = .top
     
-    private var currentPage = 1
+    private var nextPage = ""
     
     //MARK: - Main Functions
     func load() {
         notify(.startLoading)
-        newsService.fetchNews(endPoint: .fetchNews(category: selectedCategory, page: currentPage)) { [weak self] result in
+        newsService.fetchNews(endPoint: .fetchNews(category: selectedCategory, page: nextPage)) { [weak self] result in
             guard let self = self else { return }
             self.notify(.endLoading)
             switch result {
@@ -47,6 +47,7 @@ final class HomeViewModel: HomeViewModelProtocol {
         }
         
         self.news.append(contentsOf: news.results)
+        self.nextPage = news.nextPage
         
         self.news = self.news.removeDuplicates()
         
@@ -64,7 +65,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     func changeCategory(category: NewsCategories) {
         news.removeAll()
-        currentPage = 1
+        nextPage = ""
         selectedCategory = category
         hasMoreNews = true
         load()
@@ -74,7 +75,6 @@ final class HomeViewModel: HomeViewModelProtocol {
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat) {
         if height + offset - 50 >= contentHeight {
             if hasMoreNews {
-                currentPage += 1
                 load()
             }
         }
@@ -82,7 +82,7 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     func didPullToRefresh() {
         news.removeAll()
-        currentPage = 1
+        nextPage = ""
         load()
     }
     

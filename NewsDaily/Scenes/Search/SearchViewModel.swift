@@ -23,7 +23,7 @@ final class SearchViewModel: SearchViewModelPorotocol {
     private var articles = [Article]()
     
     private var query = ""
-    private var currentPage = 1
+    private var nextPage = ""
     private var hasMoreNews = true
 
     //MARK: - Main Functions
@@ -31,7 +31,7 @@ final class SearchViewModel: SearchViewModelPorotocol {
         print(#function)
         query = q
         notify(.startLoading)
-        newsService.searchFor(endPoint: .searchFor(q: query, page: currentPage)) { [weak self] result in
+        newsService.searchFor(endPoint: .searchFor(q: query, page: nextPage)) { [weak self] result in
             guard let self = self else { return }
             self.notify(.endLoading)
             switch result {
@@ -53,6 +53,8 @@ final class SearchViewModel: SearchViewModelPorotocol {
         
         self.articles.append(contentsOf: news.results)
         
+        self.nextPage = news.nextPage
+        
         self.articles = self.articles.removeDuplicates()
 
         let articlePresentation = self.articles.map { ArticlePresentation(article: $0) }
@@ -64,7 +66,7 @@ final class SearchViewModel: SearchViewModelPorotocol {
     func newSearch() {
         query = ""
         articles.removeAll()
-        currentPage = 1
+        nextPage = ""
     }
     
     func checkEmptyState() {
@@ -84,7 +86,6 @@ final class SearchViewModel: SearchViewModelPorotocol {
         if !articles.isEmpty {
             if height + offset - 50 >= contentHeight {
                 if hasMoreNews {
-                    currentPage += 1
                     search(with: query)
                 }
             }
