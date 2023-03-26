@@ -49,7 +49,6 @@
 		2C69D0E3293F5C7B00DFB6B3 /* DetailContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E2293F5C7B00DFB6B3 /* DetailContracts.swift */; };
 		2C69D0E5293F5C8400DFB6B3 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E4293F5C8400DFB6B3 /* DetailViewModel.swift */; };
 		2C69D0EA293F752000DFB6B3 /* NDActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */; };
-		2C69D0ED293F84A500DFB6B3 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C69D0EC293F84A500DFB6B3 /* SortViewController.swift */; };
 		2C7F6592295202F3004B7934 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F6591295202F3004B7934 /* SortOption.swift */; };
 		2C7F89B7295067800044FF88 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F89B6295067800044FF88 /* Coordinator.swift */; };
 		2C7F89B9295067870044FF88 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F89B8295067870044FF88 /* HomeCoordinator.swift */; };
@@ -61,6 +60,8 @@
 		2CC8F66A29489F15000A1D9A /* SearchContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66929489F15000A1D9A /* SearchContracts.swift */; };
 		2CC8F66C29489F1D000A1D9A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66B29489F1D000A1D9A /* SearchViewModel.swift */; };
 		2CC8F66F2948D3AD000A1D9A /* NDEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC8F66E2948D3AD000A1D9A /* NDEmptyStateView.swift */; };
+		2CFD127029D092A100E1FDE0 /* SortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD126F29D092A100E1FDE0 /* SortViewController.swift */; };
+		2CFD127229D0934700E1FDE0 /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFD127129D0934700E1FDE0 /* CategoriesCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,7 +108,6 @@
 		2C69D0E2293F5C7B00DFB6B3 /* DetailContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailContracts.swift; sourceTree = "<group>"; };
 		2C69D0E4293F5C8400DFB6B3 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		2C69D0E9293F752000DFB6B3 /* NDActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDActionButton.swift; sourceTree = "<group>"; };
-		2C69D0EC293F84A500DFB6B3 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
 		2C7F6591295202F3004B7934 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
 		2C7F89B6295067800044FF88 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		2C7F89B8295067870044FF88 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -119,6 +119,8 @@
 		2CC8F66929489F15000A1D9A /* SearchContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContracts.swift; sourceTree = "<group>"; };
 		2CC8F66B29489F1D000A1D9A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		2CC8F66E2948D3AD000A1D9A /* NDEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDEmptyStateView.swift; sourceTree = "<group>"; };
+		2CFD126F29D092A100E1FDE0 /* SortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewController.swift; sourceTree = "<group>"; };
+		2CFD127129D0934700E1FDE0 /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +345,7 @@
 			children = (
 				2C16FE8C293E970300FF5BA4 /* HomeNewsCell.swift */,
 				2C5FAD8E2965924A001FB6E1 /* FavoriteCell.swift */,
+				2CFD127129D0934700E1FDE0 /* CategoriesCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -376,7 +379,7 @@
 		2C69D0EB293F848400DFB6B3 /* Sort Page */ = {
 			isa = PBXGroup;
 			children = (
-				2C69D0EC293F84A500DFB6B3 /* SortViewController.swift */,
+				2CFD126F29D092A100E1FDE0 /* SortViewController.swift */,
 				2C7F6591295202F3004B7934 /* SortOption.swift */,
 			);
 			path = "Sort Page";
@@ -509,11 +512,11 @@
 				2C16FE79293E7E2300FF5BA4 /* NewsCategories.swift in Sources */,
 				2C69D0DA293F2FDF00DFB6B3 /* NDSecondaryLabel.swift in Sources */,
 				2C6637022965E65900BF7B56 /* FavoritesViewModel.swift in Sources */,
-				2C69D0ED293F84A500DFB6B3 /* SortViewController.swift in Sources */,
 				2C16FE73293E7C4600FF5BA4 /* Paths.swift in Sources */,
 				2C16FE71293E79D800FF5BA4 /* NewsEndpoint.swift in Sources */,
 				2C5FAD8F2965924A001FB6E1 /* FavoriteCell.swift in Sources */,
 				2C16FE5C293E686500FF5BA4 /* SearchViewController.swift in Sources */,
+				2CFD127229D0934700E1FDE0 /* CategoriesCell.swift in Sources */,
 				2CC8F66C29489F1D000A1D9A /* SearchViewModel.swift in Sources */,
 				2C7F89B7295067800044FF88 /* Coordinator.swift in Sources */,
 				2C550D48296727B700FA9F9A /* NDCheckmarkView.swift in Sources */,
@@ -530,6 +533,7 @@
 				2C16FE55293E676B00FF5BA4 /* HomeViewController.swift in Sources */,
 				2CC8F66A29489F15000A1D9A /* SearchContracts.swift in Sources */,
 				2C16FE87293E8F9800FF5BA4 /* HomeViewModel.swift in Sources */,
+				2CFD127029D092A100E1FDE0 /* SortViewController.swift in Sources */,
 				2C16FE89293E8FA100FF5BA4 /* HomeContracts.swift in Sources */,
 				2C16FE8D293E970300FF5BA4 /* HomeNewsCell.swift in Sources */,
 				2C16FE57293E677400FF5BA4 /* DetailViewController.swift in Sources */,
@@ -695,7 +699,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -728,7 +732,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

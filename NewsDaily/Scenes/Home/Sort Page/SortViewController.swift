@@ -2,7 +2,7 @@
 //  SortViewController.swift
 //  NewsDaily
 //
-//  Created by Samed Dağlı on 6.12.2022.
+//  Created by Samed Dağlı on 26.03.2023.
 //
 
 import UIKit
@@ -13,9 +13,7 @@ protocol SortViewDelegate: AnyObject {
 
 final class SortViewController: UIViewController {
     //MARK: - UI Properties
-    private var tableView: UITableView!
-    private var containerView: UIView!
-    private let doneButton = NDActionButton(title: "done".localized(), backgroundColor: .clear)
+    private var collectionView: UICollectionView!
     
     //MARK: - Properties
     weak var delegate: SortViewDelegate!
@@ -23,59 +21,32 @@ final class SortViewController: UIViewController {
     private var sorts = SortOption.sorts
     private var categories: [NewsCategories] = [.top, .world, .business, .technology, .entertainment, .sports, .environment, .food, .health, .politics, .science]
     
-    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-        scrollToSelectedCategory()
     }
     
-    //MARK: - Actions
     @objc private func doneTapped() {
         dismiss(animated: true)
     }
-    
-    private func scrollToSelectedCategory() {
-        if let selectedCategory = UserDefaults.standard.object(forKey: "selectedCategory") as? Int {
-            sorts[selectedCategory].isSelected = true
-            tableView.scrollToRow(at: IndexPath(row: selectedCategory, section: 0), at: .top, animated: true)
-        }
-        else {
-            sorts[0].isSelected = true
-        }
-    }
 }
 
-//MARK: - Table View Delegates
-extension SortViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SortViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sorts.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = sorts[indexPath.row].title
-        cell.accessoryType = sorts[indexPath.row].isSelected ? .checkmark : .none
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.reuseID, for: indexPath) as! CategoriesCell
+        let article = sorts[indexPath.item]
+        cell.set(category: article)
         return cell
     }
 }
 
-extension SortViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension SortViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate.didSelectCategory(category: categories[indexPath.row])
-        
-        for (index, _) in sorts.enumerated() {
-            sorts[index].isSelected = false
-        }
-        
-        sorts[indexPath.row].isSelected.toggle()
-        UserDefaults.standard.setValue(indexPath.row, forKey: "selectedCategory")
-        
-        tableView.reloadData()
         dismiss(animated: true)
     }
 }
@@ -84,50 +55,37 @@ extension SortViewController: UITableViewDelegate {
 extension SortViewController {
     private func layout() {
         configureView()
-        configureContainerView()
-        createTableView()
+        configureCollectionView()
     }
     
     private func configureView() {
-        view.backgroundColor = .clear
+        view.backgroundColor = .systemBackground
+        title = "categories_title".localized()
+        
+        let rightBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
+        navigationItem.rightBarButtonItem = rightBarButton
     }
     
-    private func configureContainerView() {
-        containerView = UIView()
-        containerView.backgroundColor = .systemBackground
-        view.addSubview(containerView)
-        
-        containerView.snp.makeConstraints { make in
-            make.bottom.equalTo(view).offset(20)
-            make.width.equalTo(view.snp.width)
-            make.height.equalTo(view.snp.height).multipliedBy(0.5)
-        }
-        
-        containerView.layer.cornerRadius = 20
-        
-        doneButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
-        doneButton.setTitleColor(.label, for: .normal)
-        doneButton.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
-        
-        containerView.addSubview(doneButton)
-        doneButton.snp.makeConstraints { make in
-            make.top.equalTo(containerView).offset(10)
-            make.trailing.equalTo(containerView).offset(-10)
-        }
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: create2ColumnLayout())
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(CategoriesCell.self, forCellWithReuseIdentifier: CategoriesCell.reuseID)
+        view.addSubview(collectionView)
     }
     
-    private func createTableView() {
-        tableView = UITableView(frame: .zero, style: .plain)
+    private func create2ColumnLayout() -> UICollectionViewFlowLayout {
+        let width = view.frame.width
+        let padding: CGFloat = 10
+        let itemSpacing: CGFloat = 10
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        containerView.addSubview(tableView)
+        let availableWidth = width - (padding * 2) - (itemSpacing)
+        let itemWidth = availableWidth / 2
         
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(doneButton.snp.bottom)
-            make.leading.trailing.equalTo(containerView)
-            make.bottom.equalTo(containerView.safeAreaLayoutGuide.snp.bottom).offset(-20)
-        }
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = .init(top: padding, left: padding, bottom: padding, right: padding)
+        layout.itemSize = .init(width: itemWidth, height: itemWidth)
+        return layout
     }
 }
+

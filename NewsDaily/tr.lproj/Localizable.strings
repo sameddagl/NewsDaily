@@ -9,6 +9,7 @@
 "app_name" = "News Daily";
 "search_title" = "Arama";
 "favorites_title" = "Favoriler";
+"categories_title" = "Kategoriler";
 "more_button" = "Daha fazla";
 
 //Search Field

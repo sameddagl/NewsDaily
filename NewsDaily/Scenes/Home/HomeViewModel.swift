@@ -22,12 +22,15 @@ final class HomeViewModel: HomeViewModelProtocol {
     //MARK: - Properties
     private var news = [Article]()
     private var selectedCategory: NewsCategories = .top
-    
+    private var didPullToRefreshPage = false
     private var nextPage: String? = ""
     
     //MARK: - Main Functions
     func load() {
-        notify(.startLoading)
+        if !didPullToRefreshPage {
+            notify(.startLoading)
+        }
+        
         newsService.fetchNews(endPoint: .fetchNews(category: selectedCategory, page: nextPage)) { [weak self] result in
             guard let self = self else { return }
             self.notify(.endLoading)
@@ -77,7 +80,9 @@ final class HomeViewModel: HomeViewModelProtocol {
     func didPullToRefresh() {
         news.removeAll()
         nextPage = ""
+        didPullToRefreshPage = true
         load()
+        didPullToRefreshPage = false
     }
     
     func didSelectToSort() {

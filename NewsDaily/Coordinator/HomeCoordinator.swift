@@ -47,6 +47,6 @@ final class HomeCoordinator: HomeCoordinatorProtocol {
     func goToSort(delegate: HomeViewModel) {
         let vc = SortViewController()
         vc.delegate = delegate
-        navigationController.present(vc, animated: true)
+        navigationController.present(UINavigationController(rootViewController: vc), animated: true)
     }
 }
