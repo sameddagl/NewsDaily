@@ -18,8 +18,7 @@ final class SortViewController: UIViewController {
     //MARK: - Properties
     weak var delegate: SortViewDelegate!
     
-    private var sorts = SortOption.sorts
-    private var categories: [NewsCategories] = [.top, .world, .business, .technology, .entertainment, .sports, .environment, .food, .health, .politics, .science]
+    private var categories = SortOption.sorts
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,20 +32,20 @@ final class SortViewController: UIViewController {
 
 extension SortViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sorts.count
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.reuseID, for: indexPath) as! CategoriesCell
-        let article = sorts[indexPath.item]
-        cell.set(category: article)
+        let category = categories[indexPath.item]
+        cell.set(category: category)
         return cell
     }
 }
 
 extension SortViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate.didSelectCategory(category: categories[indexPath.row])
+        delegate.didSelectCategory(category: categories[indexPath.row].category)
         dismiss(animated: true)
     }
 }
