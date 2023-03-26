@@ -23,8 +23,7 @@ final class SearchViewModel: SearchViewModelPorotocol {
     private var articles = [Article]()
     
     private var query = ""
-    private var nextPage = ""
-    private var hasMoreNews = true
+    private var nextPage: String? = ""
 
     //MARK: - Main Functions
     func search(with q: String) {
@@ -44,13 +43,6 @@ final class SearchViewModel: SearchViewModelPorotocol {
     }
     
     private func updateData(with news: News) {
-        if news.results.count <= 0 {
-            self.hasMoreNews = false
-        }
-        else {
-            self.hasMoreNews = true
-        }
-        
         self.articles.append(contentsOf: news.results)
         
         self.nextPage = news.nextPage
@@ -85,7 +77,7 @@ final class SearchViewModel: SearchViewModelPorotocol {
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat) {
         if !articles.isEmpty {
             if height + offset - 50 >= contentHeight {
-                if hasMoreNews {
+                if nextPage != nil {
                     search(with: query)
                 }
             }
@@ -94,17 +86,10 @@ final class SearchViewModel: SearchViewModelPorotocol {
     
     func selectItem(at index: Int) {
         let selectedArticle = articles[index]
-        navigate(to: .detail(article: selectedArticle))
+        coordinator?.goToDetail(article: selectedArticle)
     }
     
     //MARK: - Helper Functions
-    private func navigate(to root: SearchRoute) {
-        switch root {
-        case .detail(let article):
-            coordinator?.goToDetail(article: article)
-        }
-    }
-    
     private func notify(_ output: SearchOutputs) {
         delegate?.handleOutputs(output)
     }

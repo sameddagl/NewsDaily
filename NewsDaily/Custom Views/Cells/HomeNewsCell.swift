@@ -12,7 +12,7 @@ import SDWebImage
 final class HomeNewsCell: UITableViewCell {
     static let reuseID = "HomeNewsCell"
     
-    private lazy var articleImageView = NDCellImage(frame: .zero)
+    private let articleImageView = NDCellImage(frame: .zero)
     private let articleTitleLabel = NDTitleLabel(alignment: .left, fontSize: 15)
     private let sourceTitleLabel = NDSecondaryLabel(alignment: .left)
     

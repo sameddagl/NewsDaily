@@ -74,7 +74,7 @@ extension UIViewController {
         DispatchQueue.main.async {
             let checkmarkView = NDCheckmarkView(message: message)
             
-            containerView = UIView(frame: self.view.bounds)
+            containerView = UIView(frame: view.bounds)
             guard let containerView = containerView else { return }
             containerView.addSubview(checkmarkView)
             containerView.backgroundColor = .clear
@@ -83,7 +83,7 @@ extension UIViewController {
                 make.center.equalTo(containerView)
             }
             
-            self.view.addSubview(containerView)
+            view.addSubview(containerView)
             
             containerView.alpha = 0
             

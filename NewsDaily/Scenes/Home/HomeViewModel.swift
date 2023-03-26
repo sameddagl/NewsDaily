@@ -21,10 +21,9 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     //MARK: - Properties
     private var news = [Article]()
-    private var hasMoreNews = true
     private var selectedCategory: NewsCategories = .top
     
-    private var nextPage = ""
+    private var nextPage: String? = ""
     
     //MARK: - Main Functions
     func load() {
@@ -42,10 +41,6 @@ final class HomeViewModel: HomeViewModelProtocol {
     }
     
     private func updateData(with news: News) {
-        if news.results.count <= 0 {
-            hasMoreNews = false
-        }
-        
         self.news.append(contentsOf: news.results)
         self.nextPage = news.nextPage
         
@@ -67,14 +62,13 @@ final class HomeViewModel: HomeViewModelProtocol {
         news.removeAll()
         nextPage = ""
         selectedCategory = category
-        hasMoreNews = true
         load()
         notify(.changeCategory)
     }
 
     func pagination(height: CGFloat, offset: CGFloat, contentHeight: CGFloat) {
         if height + offset - 50 >= contentHeight {
-            if hasMoreNews {
+            if nextPage != nil {
                 load()
             }
         }

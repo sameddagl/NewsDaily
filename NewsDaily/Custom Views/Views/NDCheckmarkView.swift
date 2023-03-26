@@ -35,7 +35,6 @@ final class NDCheckmarkView: UIView {
             make.width.height.equalTo(150)
         }
         
-        
         containerView.addSubview(checkmarkImageView)
         
         checkmarkImageView.image = SFSymbols.checkmark

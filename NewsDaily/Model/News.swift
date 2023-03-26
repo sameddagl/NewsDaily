@@ -10,7 +10,7 @@ import Foundation
 struct News: Decodable {
     let status: String
     let totalResults: Int
-    let nextPage: String
+    let nextPage: String?
     let results: [Article]
 }
 

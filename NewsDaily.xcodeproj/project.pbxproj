@@ -134,13 +134,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C06816C293F2B4D0085F1D3 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		2C16FE20293E647100FF5BA4 = {
 			isa = PBXGroup;
 			children = (
@@ -243,7 +236,6 @@
 		2C16FE49293E66A300FF5BA4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				2C06816C293F2B4D0085F1D3 /* Protocols */,
 				2C16FE51293E670A00FF5BA4 /* Constants.swift */,
 			);
 			path = Helper;

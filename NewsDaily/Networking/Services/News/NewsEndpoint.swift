@@ -8,8 +8,8 @@
 import Foundation
 
 enum NewsEndpoint: HTTPEndpoint {
-    case fetchNews(category: NewsCategories, page: String)
-    case searchFor(q: String, page: String)
+    case fetchNews(category: NewsCategories, page: String?)
+    case searchFor(q: String, page: String?)
     
     var path: String {
         return Paths.latest
