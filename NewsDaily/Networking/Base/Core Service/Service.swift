@@ -24,9 +24,7 @@ final class Service: ServiceProtocol {
             completion(.failure(.badURL))
             return
         }
-        
-        print(url)
-                        
+                                
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endPoint.method.rawValue
         

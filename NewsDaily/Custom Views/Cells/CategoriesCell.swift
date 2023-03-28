@@ -26,12 +26,7 @@ final class CategoriesCell: UICollectionViewCell {
     
     func set(category: SortOption) {
         titleLabel.text = category.title
-        
-//        if let imageURL = article.urlToImage {
-//            articleImageView.sd_imageIndicator = SDWebImageActivityIndicator.medium
-//            articleImageView.sd_imageTransition = .fade
-//            articleImageView.sd_setImage(with: URL(string: imageURL), placeholderImage: SFSymbols.placeholderImage)
-//        }
+        articleImageView.image = category.image
     }
     
     private func configure() {
